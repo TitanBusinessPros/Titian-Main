@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Titan Business Pros | Private-Label Social Platforms</title>
+<meta name="description" content="Titan Business Pros builds and licenses a complete, production-proven social platform — real games, real subscription billing, bank-grade security — launched under your brand." />
+<link rel="icon" type="image/png" href="https://github.com/TitanBusinessPros/Lease-Ag-Land-4-More/raw/main/Titan%20Logo-2.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --ink-950: #0E1A1C;
+  --steel-800: #14282A;
+  --steel-700: #1C3638;
+  --paper: #F2F5F4;
+  --paper-raised: #FFFFFF;
+  --brass-500: #12897E;
+  --brass-300: #5EEAD4;
+  --brass-100: #E1F7F3;
+  --slate-400: #8FA5A3;
+  --slate-600: #486260;
+  --line-dark: rgba(94, 234, 212, 0.16);
+  --line-light: rgba(14, 26, 28, 0.1);
+  --text-dark: #0E1A1C;
+  --text-muted: #263938;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--paper);
+  color: var(--text-dark);
+  line-height: 1.65;
+}
+a { color: inherit; }
+.container { max-width: 1140px; margin: 0 auto; padding: 0 1.75rem; }
+h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.01em; }
+.mono { font-family: 'IBM Plex Mono', monospace; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* -------------------- Header -------------------- */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(15, 23, 32, 0.94);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line-dark);
+}
+.header-row { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; }
+.brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+.brand img { height: 34px; width: auto; }
+.brand-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.05rem; color: #F4F2EC; letter-spacing: 0.01em; }
+.header-nav { display: flex; align-items: center; gap: 2rem; }
+.header-nav a { color: var(--slate-400); text-decoration: none; font-size: 0.92rem; font-weight: 500; }
+.header-nav a:hover { color: var(--brass-300); }
+.btn-header-cta {
+  background: #FFFFFF; color: #0F1720; font-weight: 700; font-size: 0.9rem;
+  padding: 0.6rem 1.3rem; border-radius: 4px; text-decoration: none;
+  border: 1.5px solid var(--brass-300);
+}
+.btn-header-cta:hover { background: var(--brass-300); }
+@media (max-width: 760px) { .header-nav a:not(.btn-header-cta) { display: none; } }
+
+/* -------------------- Hero -------------------- */
+.hero {
+  background: var(--ink-950);
+  background-image:
+    linear-gradient(rgba(217, 184, 118, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217, 184, 118, 0.06) 1px, transparent 1px);
+  background-size: 42px 42px;
+  color: #F4F2EC;
+  padding: 5.5rem 0 4.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 55% at 50% 15%, rgba(15,23,32,0) 0%, var(--ink-950) 78%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; text-align: center; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--brass-300); border: 1px solid var(--line-dark); border-radius: 999px;
+  padding: 0.4rem 0.9rem; margin-bottom: 1.75rem;
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.7rem);
+  line-height: 1.1;
+  max-width: 860px;
+  margin: 0 auto 1.4rem;
+}
+.hero h1 em { font-style: normal; color: var(--brass-300); }
+.hero .sub {
+  max-width: 640px; margin: 0 auto 2.4rem; font-size: 1.12rem; color: var(--slate-400);
+}
+.hero-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem; }
+.btn-primary, .btn-secondary {
+  padding: 0.9rem 2rem; font-size: 0.98rem; font-weight: 600; border-radius: 4px;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 10px; border: none; cursor: pointer;
+}
+.btn-primary { background: var(--brass-500); color: #FFFFFF; font-weight: 700; }
+.btn-primary:hover { background: #0E6F66; }
+.btn-secondary { background: transparent; color: #F4F2EC; border: 1.5px solid rgba(244,242,236,0.35); }
+.btn-secondary:hover { border-color: var(--brass-300); color: var(--brass-300); }
+
+/* -------------------- Sections -------------------- */
+section { padding: 4.5rem 0; }
+.section-eyebrow {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--brass-500); display: block; margin-bottom: 0.7rem; text-align: center;
+}
+.section-title { font-size: clamp(1.7rem, 3vw, 2.3rem); text-align: center; margin-bottom: 0.9rem; }
+.section-sub { max-width: 680px; margin: 0 auto 3rem; text-align: center; color: var(--text-muted); font-size: 1.08rem; font-weight: 500; }
+
+/* -------------------- Feature modules -------------------- */
+.module-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+@media (max-width: 800px) { .module-grid { grid-template-columns: 1fr; } }
+.module {
+  background: var(--paper-raised); border: 1px solid var(--line-light); border-radius: 10px;
+  padding: 1.8rem 2rem; box-shadow: 0 2px 14px rgba(15,23,32,0.05);
+}
+.module.module-signature { border: 1.5px solid var(--brass-500); grid-column: span 2; }
+@media (max-width: 800px) { .module.module-signature { grid-column: span 1; } }
+.module-head { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--line-light); padding-bottom: 0.9rem; }
+.module-head h3 { font-size: 1.15rem; }
+.module-head .module-tag {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--slate-600); background: rgba(15,23,32,0.05); padding: 0.25rem 0.6rem; border-radius: 999px;
+}
+.module-signature .module-tag { color: var(--brass-500); background: rgba(184, 134, 59, 0.12); }
+.module ul { list-style: none; }
+.module li {
+  position: relative; padding-left: 1.4rem; margin-bottom: 0.65rem; font-size: 0.96rem; font-weight: 500; color: var(--text-muted);
+}
+.module li::before {
+  content: "✓"; position: absolute; left: 0; top: 0; color: var(--brass-500); font-weight: 700; font-size: 0.85rem;
+}
+.module li:last-child { margin-bottom: 0; }
+.module li strong { color: var(--text-dark); font-weight: 600; }
+.signature-callout {
+  margin-top: 1.1rem; padding: 1rem 1.2rem; background: rgba(184, 134, 59, 0.08);
+  border-left: 3px solid var(--brass-500); border-radius: 4px; font-size: 0.9rem; color: var(--text-dark);
+}
+
+/* -------------------- Architecture / security spec sheet -------------------- */
+.architecture-section { background: var(--ink-950); color: #F4F2EC; }
+.architecture-section .section-title, .architecture-section .section-eyebrow { color: #F4F2EC; }
+.architecture-section .section-eyebrow { color: var(--brass-300); }
+.architecture-section .section-sub { color: var(--slate-400); }
+.spec-table { max-width: 900px; margin: 0 auto; border: 1px solid var(--line-dark); border-radius: 10px; overflow: hidden; }
+.spec-row {
+  display: grid; grid-template-columns: 250px 1fr; gap: 1.5rem;
+  padding: 1.3rem 1.6rem; border-bottom: 1px solid var(--line-dark);
+}
+.spec-row:last-child { border-bottom: none; }
+.spec-row:nth-child(odd) { background: rgba(30, 46, 61, 0.4); }
+.spec-row.spec-highlight { background: rgba(184, 134, 59, 0.12); }
+.spec-key {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; color: var(--brass-300); font-weight: 500;
+  align-self: start;
+}
+.spec-val { font-size: 0.94rem; color: #D8DEE4; }
+@media (max-width: 680px) {
+  .spec-row { grid-template-columns: 1fr; gap: 0.4rem; }
+}
+
+/* -------------------- Included subscription band -------------------- */
+.included-section { background: var(--ink-950); color: #F4F2EC; }
+.included-section .section-eyebrow { color: var(--brass-300); }
+.included-section .section-title { color: #F4F2EC; }
+.included-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem; max-width: 980px; margin: 0 auto 2.5rem; }
+@media (max-width: 800px) { .included-pillars { grid-template-columns: repeat(2, 1fr); } }
+.included-pillar {
+  background: rgba(30, 46, 61, 0.4); border: 1px solid var(--line-dark); border-radius: 10px;
+  padding: 1.6rem 1.2rem; text-align: center;
+}
+.included-pillar .pillar-icon { font-size: 1.7rem; margin-bottom: 0.7rem; }
+.included-pillar h4 { font-family: 'Space Grotesk', sans-serif; font-size: 1.02rem; margin-bottom: 0.5rem; color: #F4F2EC; }
+.included-pillar p { font-size: 0.86rem; color: var(--slate-400); }
+.included-promise {
+  max-width: 720px; margin: 0 auto; text-align: center; font-size: 1.15rem; font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif; color: var(--brass-300); line-height: 1.4;
+}
+.included-promise span { display: block; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.92rem; color: var(--slate-400); margin-top: 0.6rem; }
+
+/* -------------------- Private label explainer -------------------- */
+.explainer-flex { display: flex; gap: 2.5rem; align-items: center; flex-wrap: wrap; }
+.explainer-text { flex: 1; min-width: 300px; }
+.explainer-text p { color: var(--text-muted); margin-bottom: 1rem; font-size: 1.05rem; font-weight: 500; }
+.explainer-visual {
+  flex: 1; min-width: 280px; background: var(--paper-raised); border: 1px solid var(--line-light);
+  border-radius: 10px; padding: 1.6rem; box-shadow: 0 2px 14px rgba(15,23,32,0.05);
+}
+.rebrand-row { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 0; border-bottom: 1px dashed var(--line-light); font-size: 0.92rem; }
+.rebrand-row:last-child { border-bottom: none; }
+.rebrand-row .from { color: var(--text-muted); }
+.rebrand-row .arrow { color: var(--brass-500); font-weight: 700; }
+.rebrand-row .to { font-weight: 600; }
+
+/* -------------------- CTA band -------------------- */
+.cta-band { background: var(--brass-100); text-align: center; }
+.cta-band h2 { margin-bottom: 0.8rem; }
+.cta-band p { color: var(--slate-600); max-width: 560px; margin: 0 auto 2rem; }
+.cta-band .cta-secondary-link { display: block; margin-top: 1.1rem; font-size: 0.9rem; color: var(--slate-600); text-decoration: none; }
+.cta-band .cta-secondary-link a { color: var(--brass-500); font-weight: 600; text-decoration: underline; }
+
+/* -------------------- Footer -------------------- */
+.footer { background: var(--ink-950); color: var(--slate-400); padding: 3rem 0 2.2rem; font-size: 0.9rem; }
+.footer .container { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.6rem; }
+.footer-brand { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem; }
+.footer-brand img { height: 26px; }
+.footer-brand span { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #F4F2EC; }
+.footer a { color: var(--brass-300); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+.footer .fine { margin-top: 1rem; font-size: 0.78rem; opacity: 0.65; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="#top">
+      <img src="https://github.com/TitanBusinessPros/Lease-Ag-Land-4-More/raw/main/Titan%20Logo-2.png" alt="Titan Business Pros logo" />
+      <span class="brand-name">Titan Business Pros</span>
+    </a>
+    <nav class="header-nav">
+      <a href="#features">Platform</a>
+      <a href="#architecture">Security</a>
+      <a href="mailto:info@titanbusinesspros.com" class="btn-header-cta">Get a Demo</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <span class="hero-eyebrow">● Built once · Proven live · Ready for your brand</span>
+      <h1>A complete social platform empire — <em>launched under your name.</em></h1>
+      <p class="sub">Stop paying developers to build what already exists. A full lineup of playable games. Chat rooms for every town and topic. Real subscription billing. Bank-grade security. We already built it, already proved it live, and already fixed the problems most platforms only find out about after a breach. It's ready to relaunch under your brand today — not in six months.</p>
+      <div class="hero-buttons">
+        <a href="mailto:info@titanbusinesspros.com?subject=Private%20Label%20Inquiry" class="btn-primary">Request a walkthrough →</a>
+        <a href="https://www.townfuss.com" target="_blank" rel="noopener noreferrer" class="btn-secondary">Sign up &amp; explore a live demo →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="container">
+      <span class="section-eyebrow">The Platform</span>
+      <h2 class="section-title">Everything already built. Nothing left to guess at.</h2>
+      <p class="section-sub">This isn't a template. It isn't a wireframe. It's a live, running platform with real members, real moderation, and real money already moving through it — while your competitors are still sketching ideas on a whiteboard.</p>
+
+      <div class="module-grid">
+
+        <div class="module module-signature">
+          <div class="module-head"><h3>Games &amp; Leaderboards</h3><span class="module-tag">Signature</span></div>
+          <ul>
+            <li><strong>A full lineup of playable games:</strong> Chess, Checkers, WynneWars, Golf, Frisbee Golf, and Cribbage — with more added over time</li>
+            <li>Every game supports <strong>vs-computer</strong> (adjustable AI difficulty), <strong>local pass-and-play</strong>, and full <strong>online multiplayer</strong></li>
+            <li>Online play includes waiting rooms, open public tables, and direct friend invites with cooldown protection against spam</li>
+            <li>Per-game leaderboards and live mini-chat between opponents</li>
+          </ul>
+          <div class="signature-callout">🃏 <strong>Cribbage runs a genuinely server-secured hidden-hand engine</strong> — an opponent's cards are invisible at the database level itself, not just hidden by the interface. Someone inspecting the raw data traffic still can't see what the other player is holding.</div>
+        </div>
+
+        <div class="module">
+          <div class="module-head"><h3>Trust &amp; Accounts</h3><span class="module-tag">Core</span></div>
+          <ul>
+            <li>Email/password sign-up with <strong>required email verification</strong></li>
+            <li><strong>Mandatory 18+ confirmation</strong> at sign-up, actually enforced</li>
+            <li>Every profile is <strong>admin-reviewed and private until approved</strong></li>
+            <li>Terms of Service agreement gate before anyone can participate</li>
+            <li>Self-service account deletion &amp; automatic inactive-account cleanup</li>
+          </ul>
+        </div>
+
+        <div class="module">
+          <div class="module-head"><h3>Community &amp; Social</h3><span class="module-tag">Core</span></div>
+          <ul>
+            <li>Profiles with photos across every configured town or region</li>
+            <li>Feed with word-limited posts and automatic phone-number/contact detection</li>
+            <li>Directory search, friend requests, and live online/offline presence</li>
+            <li>Direct messaging with tiered daily limits and content filtering</li>
+            <li><strong>Chat rooms for every town</strong>, plus dedicated topic rooms — as many as your community needs</li>
+            <li>Push notifications, an in-app notification bell, and a weekly automated "Neighbor of the Week" spotlight</li>
+          </ul>
+        </div>
+
+        <div class="module">
+          <div class="module-head"><h3>Moderation &amp; Reporting</h3><span class="module-tag">Control</span></div>
+          <ul>
+            <li>Profile &amp; chat message reporting, both with a dedicated admin review queue</li>
+            <li>A separate <strong>bug report queue</strong> — members can flag problems directly to admins</li>
+            <li>Banned-word filtering and automatic contact-info blocking across posts and messages</li>
+            <li>Full chat moderation — delete any message, from any room, instantly</li>
+          </ul>
+        </div>
+
+        <div class="module">
+          <div class="module-head"><h3>Business Directory</h3><span class="module-tag">Revenue</span></div>
+          <ul>
+            <li>Admin-approved business listings, billed automatically</li>
+            <li>Logo upload, phone, town, and a full service description per listing</li>
+            <li>Automatic renewal handling with zero manual tracking required</li>
+            <li>Supports <strong>tiered membership plans</strong> with real Stripe billing — automatic grants, renewals, and cancellations, priced however fits your community</li>
+          </ul>
+        </div>
+
+        <div class="module">
+          <div class="module-head"><h3>Installable Everywhere</h3><span class="module-tag">Reach</span></div>
+          <ul>
+            <li>Installable as a real app via a full PWA manifest and icon set</li>
+            <li>Native install prompt on Android/Chrome, guided setup on iPhone</li>
+            <li><strong>Google Play and Apple App Store publishing available at every tier</strong> — never held back as an upsell</li>
+          </ul>
+        </div>
+
+        <div class="module">
+          <div class="module-head"><h3>Ad &amp; Revenue Partnerships</h3><span class="module-tag">Revenue</span></div>
+          <ul>
+            <li>Your games can integrate with established <strong>ad-network partners</strong> that show rewarded and in-game ads to your active players</li>
+            <li>Set up on a <strong>revenue-share basis</strong> — no upfront cost to enable it</li>
+            <li>Revenue scales directly with real engagement — the more your community plays, the more it earns</li>
+            <li>Actual payouts vary by ad format, player engagement, and audience — we'll walk you through realistic expectations for your specific community, not a one-size-fits-all number</li>
+          </ul>
+        </div>
+
+        <div class="module module-signature">
+          <div class="module-head"><h3>Ongoing Development &amp; Support</h3><span class="module-tag">Partnership</span></div>
+          <ul>
+            <li>Launching isn't the finish line — Titan offers a plan that keeps <strong>a dedicated developer on your platform</strong> after launch</li>
+            <li>Request edits, new features, or updates any time — no need to hire and train your own developer, or learn a codebase from scratch</li>
+            <li>The same team that built and secured this platform stays the one maintaining it</li>
+          </ul>
+          <div class="signature-callout">🔧 Titan also offers a range of other business services beyond this platform — see the complete list at <a href="https://www.oklahoma.marketing" target="_blank" rel="noopener noreferrer" style="color: var(--brass-500); font-weight: 600;">oklahoma.marketing</a>.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="architecture" class="architecture-section">
+    <div class="container">
+      <span class="section-eyebrow">Under The Hood</span>
+      <h2 class="section-title">Enterprise-grade security. Zero servers to maintain.</h2>
+      <p class="section-sub">Most platforms find out they're vulnerable after something goes wrong. Ours already went through that fight — every rule, every login, every payment is protected by architecture that's been tested against real attacks, not just written on a whiteboard and hoped for.</p>
+
+      <div class="spec-table">
+        <div class="spec-row">
+          <div class="spec-key">Authentication</div>
+          <div class="spec-val">Firebase Authentication with mandatory email verification before any account can post or appear publicly.</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key">Database Security</div>
+          <div class="spec-val">Least-privilege Firestore rules on every collection — admin-only paths, owner-only paths, participant-only game and message access — enforced server-side, not just hidden in the interface.</div>
+        </div>
+        <div class="spec-row spec-highlight">
+          <div class="spec-key">Security-First Development</div>
+          <div class="spec-val">Every database rule and access path is reviewed against real attack patterns before it ships — security is verified during development, not discovered after the fact.</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key">Bot &amp; Abuse Protection</div>
+          <div class="spec-val">App Check (reCAPTCHA v3) verifies every request comes from your real app before it ever reaches your database.</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key">File Storage</div>
+          <div class="spec-val">Owner-only writes, file size and type restrictions, and default-deny on anything not explicitly permitted.</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key">Rate Limiting</div>
+          <div class="spec-val">Message limits, invite cooldowns, and resubmission limits are enforced inside the database rules themselves — a modified client can't bypass them, because the check never happens client-side alone.</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key">Content Moderation</div>
+          <div class="spec-val">Banned-word filtering and automatic contact-info detection block phone numbers, emails, and links from posts and messages before they're ever saved.</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key">Payment Security</div>
+          <div class="spec-val">Stripe webhook signature verification, supporting multiple independent signing secrets — API keys are stored in Secret Manager and never touch application code.</div>
+        </div>
+        <div class="spec-row spec-highlight">
+          <div class="spec-key">Disaster Recovery</div>
+          <div class="spec-val">Daily automated Firestore backups (30-day retention), daily Auth account exports (30-day retention, stored where no client-side code can ever read them), and Storage file versioning (90-day retention) — plus a written recovery runbook covering database loss, account loss, a single missing file, or losing the entire project.</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key">Credential Hygiene</div>
+          <div class="spec-val">Repository access is secured through Git Credential Manager rather than embedded tokens — nothing sensitive lives in plain text in the codebase.</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key">Quality Assurance</div>
+          <div class="spec-val">A real, browser-based automated test suite exercises the entire platform end-to-end — including live two-player games — before any update ships.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="included-section">
+    <div class="container">
+      <span class="section-eyebrow">Every Platform, Every Time</span>
+      <h2 class="section-title">This isn't a one-and-done build. It's a partnership.</h2>
+      <div class="included-pillars">
+        <div class="included-pillar">
+          <div class="pillar-icon">🛡️</div>
+          <h4>Cybersecurity Monitoring</h4>
+          <p>Ongoing protection against attacks, abuse, and bad actors — not a one-time setup and a goodbye.</p>
+        </div>
+        <div class="included-pillar">
+          <div class="pillar-icon">🚨</div>
+          <h4>Error Detection</h4>
+          <p>We know when something breaks before your members do — and we fix it fast.</p>
+        </div>
+        <div class="included-pillar">
+          <div class="pillar-icon">📊</div>
+          <h4>Analytics</h4>
+          <p>Real growth and engagement data, so you always know exactly how your platform is performing.</p>
+        </div>
+        <div class="included-pillar">
+          <div class="pillar-icon">☎️</div>
+          <h4>24/7 Customer Service</h4>
+          <p>Real support, any time you need it — not a ticket queue that goes quiet for a week.</p>
+        </div>
+      </div>
+      <p class="included-promise">We never leave people hanging.<span>Our team is based right here in Oklahoma — not an overseas call center, not a chatbot. Real people who already know your platform, because they built it.</span></p>
+    </div>
+  </section>
+
+  <section id="private-label">
+    <div class="container">
+      <span class="section-eyebrow">How It Works</span>
+      <h2 class="section-title">One platform. Your brand on top.</h2>
+      <div class="explainer-flex">
+        <div class="explainer-text">
+          <p>Private labeling means you get the entire platform above — the code, the backend, the security, the billing, all of it — relaunched under your own name, your own colors, and your own domain. Your members never see Titan Business Pros; they see your brand, running a platform that's already been built, tested, and proven.</p>
+          <p>We handle the technical setup: your logo, your color palette, your town or community's specific configuration, and your own Firebase project so your data is fully yours, hosted independently.</p>
+          <p>You focus on your community. We've already solved the engineering.</p>
+        </div>
+        <div class="explainer-visual">
+          <div class="rebrand-row"><span class="from mono">Platform engine</span><span class="arrow">→</span><span class="to">Stays the same, proven</span></div>
+          <div class="rebrand-row"><span class="from mono">Brand &amp; colors</span><span class="arrow">→</span><span class="to">100% yours</span></div>
+          <div class="rebrand-row"><span class="from mono">Domain</span><span class="arrow">→</span><span class="to">Your own web address</span></div>
+          <div class="rebrand-row"><span class="from mono">Firebase project</span><span class="arrow">→</span><span class="to">Independent, owned by you</span></div>
+          <div class="rebrand-row"><span class="from mono">Membership revenue</span><span class="arrow">→</span><span class="to">100% yours to keep</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container">
+      <span class="section-eyebrow">Next Step</span>
+      <h2>Take a tour of a real platform we've already built.</h2>
+      <p>We'll walk you through the live platform, show you exactly what launching under your brand looks like, and answer every technical question you have.</p>
+      <a href="mailto:info@titanbusinesspros.com?subject=Private%20Label%20Inquiry" class="btn-primary">Request a walkthrough →</a>
+      <a href="glossary.html" class="btn-secondary" style="margin-left: 0.8rem; border-color: var(--brass-500); color: var(--text-dark);">Want to learn more about what we do?</a>
+      <div class="cta-secondary-link">Or explore it yourself right now at <a href="https://www.townfuss.com" target="_blank" rel="noopener noreferrer">townfuss.com</a></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-brand">
+      <img src="https://github.com/TitanBusinessPros/Lease-Ag-Land-4-More/raw/main/Titan%20Logo-2.png" alt="Titan Business Pros logo" />
+      <span>Titan Business Pros</span>
+    </div>
+    <div>405-998-7979 &nbsp;|&nbsp; <a href="mailto:info@titanbusinesspros.com">info@titanbusinesspros.com</a></div>
+    <div><a href="https://www.oklahoma.marketing" target="_blank" rel="noopener noreferrer">www.oklahoma.marketing</a></div>
+    <div>Oklahoma City, OK</div>
+    <div class="fine">&copy; 2026 Titan Business Pros LLC. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
