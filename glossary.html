@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>What Does That Even Mean? | Titan Business Pros</title>
+<meta name="description" content="A plain-English glossary of 50 coding and tech terms — SQL, HTTP, API, and everything else your developer keeps saying." />
+<link rel="icon" type="image/png" href="https://github.com/TitanBusinessPros/Lease-Ag-Land-4-More/raw/main/Titan%20Logo-2.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --ink-950: #0E1A1C;
+  --paper: #F2F5F4;
+  --paper-raised: #FFFFFF;
+  --brass-500: #12897E;
+  --brass-300: #5EEAD4;
+  --brass-100: #E1F7F3;
+  --slate-400: #8FA5A3;
+  --line-light: rgba(14, 26, 28, 0.1);
+  --line-dark: rgba(94, 234, 212, 0.18);
+  --text-dark: #0E1A1C;
+  --text-muted: #263938;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: var(--paper); color: var(--text-dark); line-height: 1.6; }
+a { color: inherit; }
+.container { max-width: 1000px; margin: 0 auto; padding: 0 1.75rem; }
+h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+.mono { font-family: 'IBM Plex Mono', monospace; }
+
+.site-header { background: var(--ink-950); border-bottom: 1px solid var(--line-dark); padding: 1rem 0; }
+.header-row { display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+.brand img { height: 30px; }
+.brand-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1rem; color: #F4F2EC; }
+.back-link { color: var(--brass-300); text-decoration: none; font-size: 0.9rem; font-weight: 600; }
+.back-link:hover { text-decoration: underline; }
+
+.hero { text-align: center; padding: 4rem 0 2.5rem; }
+.hero-eyebrow {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--brass-500); display: block; margin-bottom: 0.8rem;
+}
+.hero h1 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 1rem; }
+.hero p { max-width: 560px; margin: 0 auto 2rem; color: var(--text-muted); font-size: 1.05rem; font-weight: 500; }
+
+.search-wrap { max-width: 480px; margin: 0 auto 3rem; position: relative; }
+#glossarySearch {
+  width: 100%; padding: 0.9rem 1.2rem; font-size: 1rem; border-radius: 999px;
+  border: 2px solid var(--line-light); font-family: 'Inter', sans-serif; background: var(--paper-raised);
+}
+#glossarySearch:focus { outline: none; border-color: var(--brass-500); }
+.result-count { text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 2rem; }
+
+.term-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; padding-bottom: 4rem; }
+@media (max-width: 900px) { .term-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .term-grid { grid-template-columns: 1fr; } }
+.term-card {
+  background: var(--paper-raised); border: 1px solid var(--line-light); border-radius: 10px;
+  padding: 1.3rem 1.4rem; box-shadow: 0 2px 10px rgba(14,26,28,0.05);
+}
+.term-card.hidden { display: none; }
+.term-card h3 { font-size: 1.02rem; color: var(--brass-500); margin-bottom: 0.5rem; }
+.term-card p { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+
+.no-results { text-align: center; padding: 3rem 1rem; color: var(--text-muted); display: none; }
+.no-results.visible { display: block; }
+
+.cta-band { background: var(--brass-100); text-align: center; padding: 3.5rem 0; }
+.cta-band h2 { margin-bottom: 0.8rem; font-size: 1.5rem; }
+.cta-band p { color: var(--text-muted); max-width: 480px; margin: 0 auto 1.6rem; font-weight: 500; }
+.btn-primary {
+  background: var(--brass-500); color: #FFFFFF; font-weight: 700; padding: 0.9rem 2rem;
+  border-radius: 4px; text-decoration: none; display: inline-block; font-size: 0.98rem;
+}
+.btn-primary:hover { background: #0E6F66; }
+
+.footer { background: var(--ink-950); color: var(--slate-400); padding: 2.5rem 0; text-align: center; font-size: 0.85rem; }
+.footer a { color: var(--brass-300); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="index.html">
+      <img src="https://github.com/TitanBusinessPros/Lease-Ag-Land-4-More/raw/main/Titan%20Logo-2.png" alt="Titan Business Pros logo" />
+      <span class="brand-name">Titan Business Pros</span>
+    </a>
+    <a class="back-link" href="index.html">← Back to the platform</a>
+  </div>
+</header>
+
+<main>
+  <div class="hero container">
+    <span class="hero-eyebrow">● Plain English, we promise</span>
+    <h1>What does that even mean?</h1>
+    <p>Every developer throws around words like "API" and "SQL" like everyone just knows what they mean. We don't think you should have to nod along. Here's 50 of the most common ones, explained like a human.</p>
+    <div class="search-wrap">
+      <input type="text" id="glossarySearch" placeholder="Search a word... try 'cloud' or 'SQL'" />
+    </div>
+    <div class="result-count mono" id="resultCount">Showing all 50 terms</div>
+  </div>
+
+  <div class="container">
+    <div class="term-grid" id="termGrid"></div>
+    <div class="no-results" id="noResults">No terms match that search — try a different word.</div>
+  </div>
+
+  <section class="cta-band">
+    <div class="container">
+      <h2>Feeling less confused?</h2>
+      <p>That's the whole point. If you're ready to see what all of this builds into a real platform, we'd love to show you.</p>
+      <a href="index.html#top" class="btn-primary">Back to the platform →</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div>405-998-7979 &nbsp;|&nbsp; <a href="mailto:info@titanbusinesspros.com">info@titanbusinesspros.com</a></div>
+    <div style="margin-top:0.5rem;">&copy; 2026 Titan Business Pros LLC. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+const TERMS = [
+  ["API", "Application Programming Interface. A way for two different pieces of software to talk to each other and share information."],
+  ["SQL", "Structured Query Language. The language used to ask a database questions, like \"show me every customer who signed up this month.\""],
+  ["HTTP", "HyperText Transfer Protocol. The basic set of rules your browser uses to ask a website for a page, and get one back."],
+  ["HTTPS", "The secure version of HTTP. The \"S\" means the connection is encrypted, so nobody snooping on the network can read what's being sent."],
+  ["HTML", "HyperText Markup Language. The basic skeleton of every webpage — the text, headings, and structure."],
+  ["CSS", "Cascading Style Sheets. The styling layer that makes a webpage look good — colors, fonts, spacing."],
+  ["JavaScript", "The programming language that makes websites interactive — button clicks, pop-ups, live updates, all of it."],
+  ["Database", "A structured place where an app's information (users, posts, orders) actually lives."],
+  ["Server", "A computer, usually far away in a data center, that stores a website's files and data and hands them out when requested."],
+  ["Cloud", "Someone else's servers, rented instead of owned, so you don't have to buy or maintain your own hardware."],
+  ["Frontend", "Everything a visitor actually sees and clicks on in their browser."],
+  ["Backend", "The behind-the-scenes part of an app — the server, database, and logic nobody sees directly."],
+  ["Full-Stack", "A developer, or platform, that handles both the frontend and the backend."],
+  ["Framework", "A pre-built foundation of code that developers build on top of, instead of starting completely from scratch."],
+  ["Repository (Repo)", "A saved, version-tracked folder of a project's code, usually stored somewhere like GitHub."],
+  ["Git", "A tool that tracks every change ever made to a project's code, so nothing is ever truly lost."],
+  ["Deploy / Deployment", "The act of actually publishing new code so real users can use it."],
+  ["Bug", "An unintended mistake in the code that causes something to work incorrectly."],
+  ["Debug", "The process of hunting down and fixing a bug."],
+  ["Function", "A named, reusable chunk of code that does one specific job whenever it's called."],
+  ["Variable", "A named container that holds a piece of information a program needs to remember."],
+  ["Algorithm", "A step-by-step set of instructions for solving a problem or completing a task."],
+  ["Cache", "A temporary storage spot that keeps frequently-used information close by, so things load faster next time."],
+  ["Cookie", "A small piece of information a website saves in your browser, often used to remember you're logged in."],
+  ["DNS", "Domain Name System. The internet's phone book — it translates a website name like \"townfuss.com\" into the actual server address."],
+  ["SSL / TLS", "The technology behind that padlock icon in your browser — it encrypts data traveling between you and a website."],
+  ["Firewall", "A security barrier that filters incoming traffic and blocks anything that looks dangerous."],
+  ["Encryption", "Scrambling information so that only someone with the right key can read it."],
+  ["Authentication", "Proving you are who you say you are — usually by logging in with a password."],
+  ["Authorization", "Once you're logged in, deciding what you're actually allowed to see or do."],
+  ["UI (User Interface)", "The actual visual buttons, screens, and menus a person interacts with."],
+  ["UX (User Experience)", "How easy and pleasant something is to actually use, beyond just how it looks."],
+  ["Responsive Design", "A website built to automatically resize and rearrange itself to look good on any screen, phone or desktop."],
+  ["Open Source", "Software whose underlying code is publicly available for anyone to view, use, or improve."],
+  ["SaaS", "Software as a Service. Software you access online and pay for over time, instead of buying and installing it once."],
+  ["DevOps", "The practice of smoothly connecting the work of building software with the work of running and maintaining it."],
+  ["CI/CD", "Continuous Integration / Continuous Deployment. An automated pipeline that tests and publishes code changes without a person manually doing it every time."],
+  ["Webhook", "An automatic message one system sends to another the instant something happens, like a payment going through."],
+  ["JSON", "A simple, common format for organizing and sending data between systems, especially in APIs."],
+  ["REST API", "A common, standardized style of building an API so different systems can predictably talk to each other."],
+  ["Endpoint", "One specific address an API listens at for a particular kind of request."],
+  ["Token", "A piece of digital proof that you're allowed to do something, used instead of typing a password every single time."],
+  ["Hosting", "The service that actually stores and serves a website's files to the public internet."],
+  ["Domain", "A website's actual address, like \"townfuss.com.\""],
+  ["Bandwidth", "How much data can move in or out of a server at once — think of it like a pipe's width."],
+  ["Latency", "The delay between asking a server for something and getting a response back."],
+  ["Uptime", "The percentage of time a website or service is actually up and working, instead of down."],
+  ["CDN", "Content Delivery Network. A network of servers spread around the world that deliver a website faster by serving it from whichever one is closest to the visitor."],
+  ["Two-Factor Authentication (2FA)", "An extra login step beyond just a password, like a code sent to your phone, that makes an account much harder to break into."],
+  ["Analytics", "Data collected about how people actually use a website or app — what they click, how long they stay, where they came from."],
+];
+
+const grid = document.getElementById("termGrid");
+TERMS.forEach(([term, def]) => {
+  const card = document.createElement("div");
+  card.className = "term-card";
+  card.dataset.term = term.toLowerCase();
+  card.dataset.def = def.toLowerCase();
+  card.innerHTML = `<h3>${term}</h3><p>${def}</p>`;
+  grid.appendChild(card);
+});
+
+const searchInput = document.getElementById("glossarySearch");
+const resultCount = document.getElementById("resultCount");
+const noResults = document.getElementById("noResults");
+
+searchInput.addEventListener("input", () => {
+  const q = searchInput.value.trim().toLowerCase();
+  let visibleCount = 0;
+  document.querySelectorAll(".term-card").forEach((card) => {
+    const matches = !q || card.dataset.term.includes(q) || card.dataset.def.includes(q);
+    card.classList.toggle("hidden", !matches);
+    if (matches) visibleCount++;
+  });
+  resultCount.textContent = q ? `Showing ${visibleCount} of 50 terms` : "Showing all 50 terms";
+  noResults.classList.toggle("visible", visibleCount === 0);
+});
+</script>
+</body>
+</html>
