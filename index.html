@@ -497,6 +497,45 @@
             font-size: 0.74rem;
             margin-top: 0.4rem;
         }
+        .coverflow-wrap {
+            position: relative;
+        }
+        .coverflow-arrow {
+            display: none;
+        }
+        @media (min-width: 761px) {
+            .coverflow-arrow {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 2;
+                width: 46px;
+                height: 46px;
+                border-radius: 50%;
+                border: 1px solid rgba(244, 242, 236, 0.3);
+                background: rgba(15, 23, 32, 0.75);
+                backdrop-filter: blur(4px);
+                color: #F4F2EC;
+                font-size: 1.4rem;
+                line-height: 1;
+                cursor: pointer;
+                transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+            }
+            .coverflow-arrow:hover {
+                background: var(--brass-500);
+                border-color: var(--brass-300);
+                transform: translateY(-50%) scale(1.08);
+            }
+            .coverflow-arrow-left {
+                left: 1.5rem;
+            }
+            .coverflow-arrow-right {
+                right: 1.5rem;
+            }
+        }
 
         /* ---- Orbiting satellite rings around the big "500+" stat ---- */
         .orbit-wrap {
@@ -2453,8 +2492,12 @@
                     <span class="section-eyebrow">Browse The Lineup</span>
                     <h2 class="section-title">Flip through everything we've built.</h2>
                 </div>
-                <div class="coverflow-3d" id="productCoverflow">
-                    <div class="coverflow-track" id="productCoverflowTrack"></div>
+                <div class="coverflow-wrap">
+                    <button type="button" class="coverflow-arrow coverflow-arrow-left" onclick="scrollCoverflow(-1)" aria-label="Scroll left">‹</button>
+                    <div class="coverflow-3d" id="productCoverflow">
+                        <div class="coverflow-track" id="productCoverflowTrack"></div>
+                    </div>
+                    <button type="button" class="coverflow-arrow coverflow-arrow-right" onclick="scrollCoverflow(1)" aria-label="Scroll right">›</button>
                 </div>
                 <p class="coverflow-hint">← drag or scroll to browse, click one to jump to it →</p>
             </section>
@@ -3468,6 +3511,13 @@
                     if (first) first.scrollIntoView({ inline: "center", block: "nearest" });
                     updateCoverflow();
                 });
+
+                // Desktop-only prev/next arrows — step by one item's width + gap.
+                window.scrollCoverflow = function(direction) {
+                    var item = coverWrap.querySelector(".coverflow-item");
+                    var step = item ? item.getBoundingClientRect().width + 38 : 240;
+                    coverWrap.scrollBy({ left: direction * step, behavior: "smooth" });
+                };
             }
 
             // ---------- 5. Extend the 3D scroll-reveal to section headings ----------
