@@ -187,14 +187,22 @@
             transform: rotateX(0deg) scale(1);
         }
 
-        /* Extruded, physically-pressable 3D buttons */
+        /* Extruded, physically-pressable, magnetic 3D buttons. --magnet-x/--magnet-y
+           are set by the "magnetic buttons" script as the cursor nears one; every
+           state below layers on top of that same offset instead of replacing it. */
         .btn-primary,
         .btn-outline,
         .btn-header-cta {
+            --magnet-x: 0px;
+            --magnet-y: 0px;
+            transform: translate(var(--magnet-x), var(--magnet-y));
             box-shadow: 0 4px 0 rgba(14, 26, 28, 0.28), 0 8px 16px -4px rgba(14, 26, 28, 0.32);
             transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
         }
         .btn-secondary {
+            --magnet-x: 0px;
+            --magnet-y: 0px;
+            transform: translate(var(--magnet-x), var(--magnet-y));
             box-shadow: 0 4px 0 rgba(244, 242, 236, 0.16), 0 8px 16px -4px rgba(14, 26, 28, 0.32);
             transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.2s ease, color 0.2s ease;
         }
@@ -202,13 +210,13 @@
         .btn-outline:hover,
         .btn-header-cta:hover,
         .btn-secondary:hover {
-            transform: translateY(-2px);
+            transform: translate(var(--magnet-x), var(--magnet-y)) translateY(-2px);
         }
         .btn-primary:active,
         .btn-secondary:active,
         .btn-outline:active,
         .btn-header-cta:active {
-            transform: translateY(3px);
+            transform: translate(var(--magnet-x), var(--magnet-y)) translateY(3px);
             box-shadow: 0 1px 0 rgba(14, 26, 28, 0.28), 0 2px 6px -2px rgba(14, 26, 28, 0.28);
         }
 
@@ -349,24 +357,6 @@
             z-index: 9999;
         }
 
-        /* ---- Floating 3D icons drifting through dark sections (mouse parallax) ---- */
-        .float-icon-3d {
-            position: absolute;
-            z-index: 1;
-            pointer-events: none;
-            font-size: 1.7rem;
-            opacity: 0.45;
-            filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.4));
-            will-change: transform;
-        }
-        .float-icon-3d .float-icon-inner {
-            display: block;
-            animation: floatIconBob 6s ease-in-out infinite;
-        }
-        @keyframes floatIconBob {
-            0%, 100% { transform: translateY(0) rotate(-6deg); }
-            50% { transform: translateY(-16px) rotate(6deg); }
-        }
 
         /* ---- Full 3D page-flip transitions between views ---- */
         main.flip-3d-active {
@@ -542,6 +532,89 @@
         @keyframes orbitSpin {
             from { transform: rotate(0deg) translateX(48px) rotate(0deg); }
             to { transform: rotate(360deg) translateX(48px) rotate(-360deg); }
+        }
+
+        /* ==================== 3D SYSTEM v3 — QUIET UNTIL YOU TOUCH IT ====================
+           Ten more, this time interaction- and scroll-triggered rather than sitting on
+           the page as decoration: a chromatic-aberration hover, a liquid-glass lens
+           that follows the cursor, a scroll-scrubbed particle implosion, a real GLSL
+           plasma shader, depth-of-field scroll blur, magnetic buttons, a text-scramble
+           headline reveal, a mirrored floor under the hero centerpiece, an organic
+           vertex ripple on its surface, and a velocity-based scroll skew. */
+
+        /* ---- Chromatic-aberration (RGB-split) hover on product flyers ---- */
+        .rgb-split-wrap {
+            position: relative;
+        }
+        .rgb-split-wrap .rgb-r,
+        .rgb-split-wrap .rgb-b {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            mix-blend-mode: screen;
+            opacity: 0;
+            transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s ease;
+            pointer-events: none;
+        }
+        .rgb-split-wrap .rgb-r {
+            filter: url(#rgbRedChannel);
+        }
+        .rgb-split-wrap .rgb-b {
+            filter: url(#rgbBlueChannel);
+        }
+        .product-card:hover .rgb-split-wrap .rgb-r {
+            opacity: 0.9;
+            transform: translate(-8px, 0);
+        }
+        .product-card:hover .rgb-split-wrap .rgb-b {
+            opacity: 0.9;
+            transform: translate(8px, 0);
+        }
+
+        /* ---- Liquid-glass magnifier lens that follows the cursor in dark heroes ---- */
+        .liquid-lens {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 40;
+            transform: translate3d(-50%, -50%, 0);
+            border: 1px solid rgba(244, 242, 236, 0.25);
+            box-shadow: 0 10px 34px rgba(0, 0, 0, 0.4), inset 0 0 26px rgba(255, 255, 255, 0.08);
+            backdrop-filter: url(#liquidGlass) blur(1px) saturate(1.4);
+            -webkit-backdrop-filter: blur(7px) saturate(1.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .liquid-lens.is-active {
+            opacity: 1;
+        }
+
+        /* ---- Depth-of-field scroll blur ---- */
+        .dof-target {
+            filter: blur(var(--dof-blur, 0px));
+            transition: filter 0.2s ease;
+        }
+
+        /* ---- Plasma shader canvas (Products coverflow background) ---- */
+        .plasma-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.8;
+        }
+        .coverflow-section .container,
+        .coverflow-3d,
+        .coverflow-hint {
+            position: relative;
+            z-index: 1;
         }
 
         /* -------------------- View switching (Home / About / Glossary / Licensing) -------------------- */
@@ -1742,6 +1815,23 @@
 </head>
 <body>
 
+    <!-- Hidden SVG filters powering the RGB-split flyer hover and the liquid-glass
+         cursor lens — see "3D SYSTEM v3" in <style> and its init script below. -->
+    <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+        <defs>
+            <filter id="rgbRedChannel" color-interpolation-filters="sRGB">
+                <feColorMatrix type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" />
+            </filter>
+            <filter id="rgbBlueChannel" color-interpolation-filters="sRGB">
+                <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" />
+            </filter>
+            <filter id="liquidGlass" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.009 0.012" numOctaves="2" seed="7" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" />
+            </filter>
+        </defs>
+    </svg>
+
     <header class="site-header">
         <div class="container header-row">
             <a class="brand" href="#" onclick="showView('home'); return false;">
@@ -2645,11 +2735,52 @@
         // ============================= VIEW ROUTER =============================
         var prefersReduceMotionGlobal = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+        // ---- Text-scramble headline reveal — decrypts into place on view entry ----
+        // Runs on a fixed total duration (via rAF + elapsed time) rather than a fixed
+        // per-character interval, so a long headline resolves in the same time as a
+        // short one instead of scrambling for seconds longer.
+        var SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+";
+        function scrambleText(el) {
+            if (!el || prefersReduceMotionGlobal) return;
+            var target = el.dataset.scrambleText || el.textContent;
+            el.dataset.scrambleText = target;
+            if (el._scrambleRAF) cancelAnimationFrame(el._scrambleRAF);
+            var duration = 800;
+            var start = null;
+            function step(ts) {
+                if (!start) start = ts;
+                var progress = Math.min((ts - start) / duration, 1);
+                var revealCount = Math.floor(progress * target.length);
+                var out = "";
+                for (var i = 0; i < target.length; i++) {
+                    if (target[i] === " " || i < revealCount) {
+                        out += target[i];
+                    } else {
+                        out += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+                    }
+                }
+                el.textContent = out;
+                if (progress < 1) {
+                    el._scrambleRAF = requestAnimationFrame(step);
+                } else {
+                    el.textContent = target;
+                }
+            }
+            el._scrambleRAF = requestAnimationFrame(step);
+        }
+
         function activateView(target) {
-            if (target && window.mountHero3D) {
+            if (!target) return;
+            if (window.mountHero3D) {
                 var heroEl = target.querySelector(".hero, .licensing-hero");
                 if (heroEl) window.mountHero3D(heroEl);
             }
+            if (window.mountPlasma3D) {
+                var plasmaHost = target.querySelector(".coverflow-section");
+                if (plasmaHost) window.mountPlasma3D(plasmaHost);
+            }
+            var headline = target.querySelector(".hero h1, .licensing-hero h1, .page-hero h1");
+            if (headline) scrambleText(headline);
         }
 
         function showView(name, anchorId) {
@@ -2870,12 +3001,22 @@
             }
             document.querySelectorAll(".product-status, .module-head .module-tag").forEach(makeFlipBadge);
 
-            // ---------- 4. Stacked-photo flyer frames ----------
+            // ---------- 4. Stacked-photo flyer frames + chromatic-aberration hover ----------
             document.querySelectorAll(".product-flyer img").forEach(function(img) {
                 var frame = document.createElement("div");
-                frame.className = "flyer-frame";
+                frame.className = "flyer-frame rgb-split-wrap";
                 img.parentNode.insertBefore(frame, img);
                 frame.appendChild(img);
+                if (!reduceMotion) {
+                    var redGhost = img.cloneNode();
+                    redGhost.className = "rgb-r";
+                    redGhost.removeAttribute("loading");
+                    var blueGhost = img.cloneNode();
+                    blueGhost.className = "rgb-b";
+                    blueGhost.removeAttribute("loading");
+                    frame.appendChild(redGhost);
+                    frame.appendChild(blueGhost);
+                }
             });
 
             // ---------- 5. Odometer-style count-up numbers ----------
@@ -2940,16 +3081,30 @@
             }, { passive: true });
             onScroll();
 
-            // ---------- 7. Hero spotlight that follows the cursor ----------
+            // ---------- 7. Hero spotlight + liquid-glass lens that follow the cursor ----------
+            var isFinePointer = window.matchMedia && window.matchMedia("(pointer: fine)").matches;
+            var liquidLens = null;
+            if (!reduceMotion && isFinePointer) {
+                liquidLens = document.createElement("div");
+                liquidLens.className = "liquid-lens";
+                document.body.appendChild(liquidLens);
+            }
             if (!reduceMotion) {
                 document.addEventListener("pointermove", function(e) {
+                    var overHero = false;
                     document.querySelectorAll(".hero, .licensing-hero").forEach(function(hero) {
                         if (hero.offsetParent === null) return;
                         var r = hero.getBoundingClientRect();
                         if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) return;
+                        overHero = true;
                         hero.style.setProperty("--spot-x", ((e.clientX - r.left) / r.width * 100) + "%");
                         hero.style.setProperty("--spot-y", ((e.clientY - r.top) / r.height * 100) + "%");
                     });
+                    if (liquidLens) {
+                        liquidLens.style.left = e.clientX + "px";
+                        liquidLens.style.top = e.clientY + "px";
+                        liquidLens.classList.toggle("is-active", overHero);
+                    }
                 }, { passive: true });
             }
 
@@ -2987,6 +3142,10 @@
                     positions[i * 3 + 1] = (Math.random() - 0.5) * 9;
                     positions[i * 3 + 2] = (Math.random() - 0.5) * 8;
                 }
+                // Kept as the scattered "at rest" layout — animateHero3D interpolates
+                // the live position array toward the origin from this each frame as
+                // the user scrolls, so the field visibly implodes into the centerpiece.
+                var origPositions = positions.slice();
                 var pGeo = new THREE.BufferGeometry();
                 pGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
                 var pMat = new THREE.PointsMaterial({ color: 0xB8863B, size: 0.05, transparent: true, opacity: 0.75 });
@@ -3013,7 +3172,8 @@
                     emissive: 0x5EEAD4,
                     emissiveIntensity: 0.55
                 });
-                heroCenterpiece.add(new THREE.Mesh(knotGeo, knotMat));
+                var knotMesh = new THREE.Mesh(knotGeo, knotMat);
+                heroCenterpiece.add(knotMesh);
                 // A bright edge outline on top of the solid mesh — guarantees the
                 // centerpiece reads clearly even where the dark faces catch no light.
                 var knotEdges = new THREE.LineSegments(
@@ -3022,6 +3182,26 @@
                 );
                 heroCenterpiece.add(knotEdges);
                 heroScene.add(heroCenterpiece);
+
+                // Organic vertex ripple: remember the knot's resting shape so it can
+                // be perturbed along its normals each frame without drifting.
+                var knotBasePositions = knotGeo.attributes.position.array.slice();
+                var knotNormals = knotGeo.attributes.normal.array;
+
+                // A faint mirrored "reflection" of the centerpiece on a glossy floor
+                // below it — a cheap fake (no real-time reflector) that still reads
+                // as a premium showroom-style presentation.
+                var heroFloorReflection = new THREE.Group();
+                var floorKnotMat = knotMat.clone();
+                floorKnotMat.transparent = true;
+                floorKnotMat.opacity = 0.22;
+                floorKnotMat.emissiveIntensity = 0.25;
+                heroFloorReflection.add(new THREE.Mesh(knotGeo, floorKnotMat));
+                var floorEdgeMat = new THREE.LineBasicMaterial({ color: 0x5EEAD4, transparent: true, opacity: 0.16 });
+                heroFloorReflection.add(new THREE.LineSegments(new THREE.EdgesGeometry(knotGeo, 1), floorEdgeMat));
+                heroFloorReflection.scale.y = -1;
+                heroFloorReflection.position.y = -2.7;
+                heroScene.add(heroFloorReflection);
 
                 window.addEventListener("mousemove", function(e) {
                     mouseX = (e.clientX / window.innerWidth) - 0.5;
@@ -3040,13 +3220,45 @@
                 window.addEventListener("resize", resizeHero3D);
                 window._resizeHero3D = resizeHero3D;
 
+                var heroClock = new THREE.Clock();
                 function animateHero3D() {
                     requestAnimationFrame(animateHero3D);
                     if (!heroCanvas || heroCanvas.offsetParent === null) return;
+                    var t = heroClock.getElapsedTime();
                     heroGroup.rotation.y += 0.0016;
                     heroGroup.rotation.x += 0.0005;
                     heroCenterpiece.rotation.x += 0.0032;
                     heroCenterpiece.rotation.y -= 0.0022;
+                    heroFloorReflection.rotation.x = heroCenterpiece.rotation.x;
+                    heroFloorReflection.rotation.y = -heroCenterpiece.rotation.y;
+
+                    // Scroll-scrubbed particle implosion: the scattered field pulls
+                    // in tight toward the centerpiece as the hero scrolls past —
+                    // locked directly to scroll position, no easing, so it feels
+                    // like scrubbing a timeline rather than watching an animation.
+                    var posAttr = pGeo.attributes.position;
+                    var pull = Math.min(heroScrollProgress * 1.15, 1) * 0.88;
+                    for (var pi = 0; pi < particleCount; pi++) {
+                        posAttr.array[pi * 3] = origPositions[pi * 3] * (1 - pull);
+                        posAttr.array[pi * 3 + 1] = origPositions[pi * 3 + 1] * (1 - pull);
+                        posAttr.array[pi * 3 + 2] = origPositions[pi * 3 + 2] * (1 - pull);
+                    }
+                    posAttr.needsUpdate = true;
+
+                    // Organic vertex ripple — a slow, shader-like breathing distortion
+                    // pushed along each vertex's own normal so the surface never
+                    // self-intersects.
+                    var kPos = knotGeo.attributes.position;
+                    for (var vi = 0; vi < kPos.count; vi++) {
+                        var i3 = vi * 3;
+                        var bx = knotBasePositions[i3], by = knotBasePositions[i3 + 1], bz = knotBasePositions[i3 + 2];
+                        var wave = Math.sin(bx * 1.6 + t * 1.4) * 0.05 + Math.cos(by * 1.9 - t * 1.1) * 0.045;
+                        kPos.array[i3] = bx + knotNormals[i3] * wave;
+                        kPos.array[i3 + 1] = by + knotNormals[i3 + 1] * wave;
+                        kPos.array[i3 + 2] = bz + knotNormals[i3 + 2] * wave;
+                    }
+                    kPos.needsUpdate = true;
+
                     // Scroll-driven camera fly-through: dolly in and bank slightly
                     // as this hero scrolls past, so the centerpiece feels like it's
                     // rushing toward the viewer rather than just sitting there.
@@ -3070,7 +3282,7 @@
                 requestAnimationFrame(function() { if (window._resizeHero3D) window._resizeHero3D(); });
             };
 
-            window.mountHero3D(document.querySelector("#view-home .hero"));
+            activateView(document.getElementById("view-home"));
         })();
 
         // ============================= 3D SYSTEM v2 INIT =============================
@@ -3113,29 +3325,8 @@
                 })();
             }
 
-            // ---------- 2. Floating 3D icons + site-wide mouse parallax ----------
+            // ---------- 2. Site-wide mouse parallax (hero text leans away from the cursor) ----------
             if (!reduceMotion) {
-                var ICONS = ["\u{1F3AE}", "\u{1F0CF}", "\u{1F4AC}", "\u{1F6E1}️", "\u{1F3C6}", "\u{1F48E}"];
-                var hosts = document.querySelectorAll(".hero, .licensing-hero, .footer");
-                var iconIndex = 0;
-                hosts.forEach(function(host) {
-                    var count = host.classList.contains("footer") ? 2 : 3;
-                    for (var i = 0; i < count; i++) {
-                        var outer = document.createElement("div");
-                        outer.className = "float-icon-3d";
-                        outer.dataset.depth = (14 + Math.random() * 18).toFixed(1);
-                        outer.style.top = (12 + Math.random() * 70) + "%";
-                        outer.style.left = (6 + Math.random() * 88) + "%";
-                        var inner = document.createElement("span");
-                        inner.className = "float-icon-inner";
-                        inner.textContent = ICONS[iconIndex % ICONS.length];
-                        inner.style.animationDelay = (Math.random() * 4).toFixed(2) + "s";
-                        iconIndex++;
-                        outer.appendChild(inner);
-                        host.appendChild(outer);
-                    }
-                });
-
                 var px = 0, py = 0;
                 document.addEventListener("pointermove", function(e) {
                     px = (e.clientX / window.innerWidth) - 0.5;
@@ -3144,10 +3335,6 @@
 
                 (function parallaxLoop() {
                     requestAnimationFrame(parallaxLoop);
-                    document.querySelectorAll(".float-icon-3d").forEach(function(el) {
-                        var depth = parseFloat(el.dataset.depth || "20");
-                        el.style.transform = "translate3d(" + (px * depth) + "px," + (py * depth) + "px,0)";
-                    });
                     document.querySelectorAll(".hero-inner, .licensing-hero-inner").forEach(function(el) {
                         if (el.offsetParent === null) return;
                         el.style.transform = "translate3d(" + (px * -8) + "px," + (py * -5) + "px,0)";
@@ -3239,6 +3426,161 @@
                     el.classList.add("reveal-3d");
                     headingIO.observe(el);
                 });
+            }
+
+            // ---------- 6. Magnetic buttons ----------
+            if (!reduceMotion && isFinePointer) {
+                var MAGNETIC_SELECTOR = ".btn-primary, .btn-secondary, .btn-outline, .btn-header-cta";
+                var magneticEls = Array.prototype.slice.call(document.querySelectorAll(MAGNETIC_SELECTOR));
+                document.addEventListener("pointermove", function(e) {
+                    magneticEls.forEach(function(el) {
+                        if (el.offsetParent === null) return;
+                        var r = el.getBoundingClientRect();
+                        var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+                        var dx = e.clientX - cx, dy = e.clientY - cy;
+                        var dist = Math.sqrt(dx * dx + dy * dy);
+                        var radius = Math.max(r.width, r.height) * 1.1 + 40;
+                        if (dist < radius) {
+                            var pull = (1 - dist / radius) * 0.35;
+                            el.style.setProperty("--magnet-x", (dx * pull).toFixed(1) + "px");
+                            el.style.setProperty("--magnet-y", (dy * pull).toFixed(1) + "px");
+                        } else {
+                            el.style.setProperty("--magnet-x", "0px");
+                            el.style.setProperty("--magnet-y", "0px");
+                        }
+                    });
+                }, { passive: true });
+            }
+
+            // ---------- 7. Depth-of-field scroll blur ----------
+            if (!reduceMotion) {
+                var DOF_SELECTOR = ".module, .product-card, .stat-card, .proof-card, .option-card, .feature-card";
+                document.querySelectorAll(DOF_SELECTOR).forEach(function(el) { el.classList.add("dof-target"); });
+                var dofTicking = false;
+                function updateDOF() {
+                    var activeView = document.querySelector(".view.active");
+                    if (activeView) {
+                        activeView.querySelectorAll(DOF_SELECTOR).forEach(function(el) {
+                            var r = el.getBoundingClientRect();
+                            var elCenter = r.top + r.height / 2;
+                            var span = (window.innerHeight / 2) + (r.height / 2);
+                            var dist = span > 0 ? Math.abs(elCenter - window.innerHeight / 2) / span : 0;
+                            var blur = Math.max(0, Math.min(1, dist - 0.3)) * 4.5;
+                            el.style.setProperty("--dof-blur", blur.toFixed(2) + "px");
+                        });
+                    }
+                    dofTicking = false;
+                }
+                window.addEventListener("scroll", function() {
+                    if (!dofTicking) {
+                        requestAnimationFrame(updateDOF);
+                        dofTicking = true;
+                    }
+                }, { passive: true });
+                updateDOF();
+            }
+
+            // ---------- 8. Velocity-based scroll skew ----------
+            if (!reduceMotion) {
+                var mainEl = document.querySelector("main");
+                var skewLastY = window.scrollY, skewVel = 0;
+                (function skewLoop() {
+                    requestAnimationFrame(skewLoop);
+                    var current = window.scrollY;
+                    var delta = current - skewLastY;
+                    skewLastY = current;
+                    skewVel += (delta - skewVel) * 0.15;
+                    var skew = Math.max(-1.6, Math.min(1.6, skewVel * 0.045));
+                    if (mainEl && !mainEl.classList.contains("flip-3d-active")) {
+                        mainEl.style.transform = "perspective(2200px) rotateX(" + (-skew * 0.35).toFixed(3) + "deg) skewY(" + (skew * 0.12).toFixed(3) + "deg)";
+                    }
+                })();
+            }
+
+            // ---------- 9. Custom GLSL plasma shader (Products coverflow background) ----------
+            if (!reduceMotion && typeof THREE !== "undefined") {
+                var plasmaCanvas, plasmaRenderer, plasmaScene, plasmaCamera, plasmaMat, plasmaClock;
+                function ensurePlasma3D() {
+                    if (plasmaRenderer) return;
+                    plasmaCanvas = document.createElement("canvas");
+                    plasmaCanvas.className = "plasma-canvas";
+                    try {
+                        plasmaRenderer = new THREE.WebGLRenderer({ canvas: plasmaCanvas, alpha: true });
+                    } catch (e) {
+                        return;
+                    }
+                    plasmaRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+                    plasmaScene = new THREE.Scene();
+                    plasmaCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+                    plasmaClock = new THREE.Clock();
+                    plasmaMat = new THREE.ShaderMaterial({
+                        transparent: true,
+                        uniforms: {
+                            uTime: { value: 0 },
+                            uResolution: { value: new THREE.Vector2(1, 1) },
+                            uColorA: { value: new THREE.Color(0x0B3B36) },
+                            uColorB: { value: new THREE.Color(0x5EEAD4) }
+                        },
+                        vertexShader: [
+                            "varying vec2 vUv;",
+                            "void main() {",
+                            "  vUv = uv;",
+                            "  gl_Position = vec4(position, 1.0);",
+                            "}"
+                        ].join("\n"),
+                        fragmentShader: [
+                            "precision mediump float;",
+                            "varying vec2 vUv;",
+                            "uniform float uTime;",
+                            "uniform vec2 uResolution;",
+                            "uniform vec3 uColorA;",
+                            "uniform vec3 uColorB;",
+                            "void main() {",
+                            "  vec2 uv = vUv - 0.5;",
+                            "  uv.x *= uResolution.x / max(uResolution.y, 1.0);",
+                            "  float v = 0.0;",
+                            "  v += sin((uv.x * 5.0) + uTime * 0.6);",
+                            "  v += sin((uv.y * 7.0) + uTime * 0.4);",
+                            "  v += sin((uv.x + uv.y) * 5.0 + uTime * 0.9);",
+                            "  v += sin(length(uv) * 9.0 - uTime * 1.2);",
+                            "  v *= 0.25;",
+                            "  float glow = 0.5 + 0.5 * sin(v * 3.14159265 + uTime * 0.3);",
+                            "  vec3 color = mix(uColorA, uColorB, glow);",
+                            "  float vign = smoothstep(0.75, 0.05, length(uv));",
+                            "  gl_FragColor = vec4(color, glow * 0.5 * vign);",
+                            "}"
+                        ].join("\n")
+                    });
+                    var plane = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), plasmaMat);
+                    plasmaScene.add(plane);
+
+                    function resizePlasma() {
+                        var parent = plasmaCanvas.parentElement;
+                        if (!parent || !plasmaRenderer) return;
+                        var w = parent.clientWidth, h = parent.clientHeight;
+                        if (w === 0 || h === 0) return;
+                        plasmaRenderer.setSize(w, h, false);
+                        plasmaMat.uniforms.uResolution.value.set(w, h);
+                    }
+                    window.addEventListener("resize", resizePlasma);
+                    window._resizePlasma3D = resizePlasma;
+
+                    function animatePlasma() {
+                        requestAnimationFrame(animatePlasma);
+                        if (!plasmaCanvas || plasmaCanvas.offsetParent === null) return;
+                        plasmaMat.uniforms.uTime.value = plasmaClock.getElapsedTime();
+                        plasmaRenderer.render(plasmaScene, plasmaCamera);
+                    }
+                    resizePlasma();
+                    requestAnimationFrame(animatePlasma);
+                }
+                window.mountPlasma3D = function(container) {
+                    if (!container) return;
+                    ensurePlasma3D();
+                    if (!plasmaCanvas || plasmaCanvas.parentElement === container) return;
+                    container.insertBefore(plasmaCanvas, container.firstChild);
+                    requestAnimationFrame(function() { if (window._resizePlasma3D) window._resizePlasma3D(); });
+                };
             }
         })();
     </script>
