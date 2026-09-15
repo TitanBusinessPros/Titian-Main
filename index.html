@@ -712,6 +712,22 @@
         .mobile-nav-overlay a:active {
             color: var(--brass-300);
         }
+        .mobile-nav-overlay .mobile-nav-cta {
+            margin-top: 0.6rem;
+            background: #FFFFFF;
+            color: #0F1720;
+            font-size: 1.05rem;
+            text-align: center;
+            padding: 0.9rem 1.6rem;
+            border-radius: 6px;
+            border: 1.5px solid var(--brass-300);
+            max-width: 320px;
+        }
+        .mobile-nav-overlay .mobile-nav-cta:hover,
+        .mobile-nav-overlay .mobile-nav-cta:active {
+            background: var(--brass-300);
+            color: #0F1720;
+        }
         .mobile-nav-close {
             position: absolute;
             top: 1.4rem;
@@ -727,7 +743,7 @@
         }
 
         @media (max-width: 760px) {
-            .header-nav a:not(.btn-header-cta) {
+            .header-nav {
                 display: none;
             }
             .header-row {
@@ -735,16 +751,6 @@
             }
             .brand-name {
                 font-size: 0.92rem;
-            }
-            .btn-header-cta {
-                font-size: 0.82rem;
-                padding: 0.55rem 0.9rem;
-            }
-            .btn-header-cta .cta-full {
-                display: none;
-            }
-            .btn-header-cta .cta-short {
-                display: inline;
             }
             .nav-toggle {
                 display: flex;
@@ -1897,6 +1903,7 @@
         <a href="#" onclick="showView('licensing'); toggleMobileNav(); return false;">Licensing</a>
         <a href="#" onclick="showView('products'); toggleMobileNav(); return false;">Products</a>
         <a href="#" onclick="showView('glossary'); toggleMobileNav(); return false;">Glossary</a>
+        <a href="#" onclick="showView('platform'); toggleMobileNav(); return false;" class="mobile-nav-cta">Want to buy or license a social media platform?</a>
     </div>
 
     <main>
