@@ -131,13 +131,33 @@
             border-radius: 4px;
             text-decoration: none;
             border: 1.5px solid var(--brass-300);
+            white-space: nowrap;
         }
         .btn-header-cta:hover {
             background: var(--brass-300);
         }
+        .btn-header-cta .cta-short {
+            display: none;
+        }
         @media (max-width: 760px) {
             .header-nav a:not(.btn-header-cta) {
                 display: none;
+            }
+            .header-row {
+                gap: 0.75rem;
+            }
+            .brand-name {
+                font-size: 0.92rem;
+            }
+            .btn-header-cta {
+                font-size: 0.82rem;
+                padding: 0.55rem 0.9rem;
+            }
+            .btn-header-cta .cta-full {
+                display: none;
+            }
+            .btn-header-cta .cta-short {
+                display: inline;
             }
         }
 
@@ -586,6 +606,135 @@
             color: var(--brass-500);
             font-weight: 600;
             text-decoration: underline;
+        }
+
+        /* -------------------- Products: unique sections -------------------- */
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .product-card {
+            display: flex;
+            gap: 2.2rem;
+            align-items: flex-start;
+            background: var(--paper-raised);
+            border: 1px solid var(--line-light);
+            border-radius: 12px;
+            padding: 1.9rem;
+            box-shadow: 0 2px 14px rgba(15, 23, 32, 0.05);
+        }
+        .product-flyer {
+            flex: 0 0 230px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .product-flyer img {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+            border: 1px solid var(--line-light);
+        }
+        .product-flyer .flyer-caption {
+            text-align: center;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--slate-600);
+        }
+        .product-body {
+            flex: 1;
+            min-width: 280px;
+        }
+        .product-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+        .product-head h3 {
+            font-size: 1.3rem;
+        }
+        .product-status {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.64rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.28rem 0.65rem;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+        .status-available {
+            color: var(--brass-500);
+            background: rgba(18, 137, 126, 0.12);
+        }
+        .status-building {
+            color: var(--slate-600);
+            background: rgba(72, 98, 96, 0.1);
+        }
+        .product-price {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 700;
+            color: var(--brass-500);
+            font-size: 0.94rem;
+            margin-bottom: 0.7rem;
+        }
+        .product-body > p {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            font-weight: 500;
+            margin-bottom: 1.1rem;
+        }
+        .product-body ul {
+            list-style: none;
+            margin-bottom: 1.3rem;
+        }
+        .product-body li {
+            position: relative;
+            padding-left: 1.4rem;
+            margin-bottom: 0.55rem;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+        .product-body li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--brass-500);
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+        .product-cta {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+        .product-cta a.btn-outline {
+            font-size: 0.86rem;
+            padding: 0.6rem 1.2rem;
+        }
+        .product-live-link {
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: var(--brass-500);
+            text-decoration: underline;
+        }
+        @media (max-width: 720px) {
+            .product-card {
+                flex-direction: column;
+            }
+            .product-flyer {
+                flex: none;
+                width: 100%;
+                max-width: 320px;
+                margin: 0 auto;
+            }
         }
 
         /* -------------------- About: unique sections -------------------- */
@@ -1124,7 +1273,8 @@
                 <a href="#" onclick="showView('platform','features'); return false;">Platform</a>
                 <a href="#" onclick="showView('platform','architecture'); return false;">Security</a>
                 <a href="#" onclick="showView('licensing'); return false;" style="color: var(--brass-300); font-weight: 600;">Licensing</a>
-                <a href="#" onclick="showView('platform'); return false;" class="btn-header-cta">Want to buy or license a social media platform?</a>
+                <a href="#" onclick="showView('products'); return false;">Products</a>
+                <a href="#" onclick="showView('platform'); return false;" class="btn-header-cta"><span class="cta-full">Want to buy or license a social media platform?</span><span class="cta-short">Buy or license our platform →</span></a>
             </nav>
         </div>
     </header>
@@ -1654,6 +1804,297 @@
                     <p>Visit Town Fuss to see the full platform in action — real members, real games, real revenue streams. Then let's talk about putting your brand on it.</p>
                     <a href="https://www.townfuss.com" target="_blank" rel="noopener noreferrer" class="btn-primary">Visit Town Fuss →</a>
                     <div class="cta-secondary-link">Or <a href="#" onclick="showView('home'); return false;">return to the main site</a></div>
+                </div>
+            </section>
+
+        </section>
+
+        <!-- ================= PRODUCTS VIEW ================= -->
+        <section id="view-products" class="view">
+            <div class="container" style="padding-top: 2rem;">
+                <a class="back-link" href="#" onclick="showView('home'); return false;">← Back to home</a>
+            </div>
+
+            <div class="page-hero container">
+                <h1>Apps &amp; platforms we've built — and put up for sale.</h1>
+                <p>Everything below is real work out of Titan Business Pros: some ready to license today, some still in active development. Scan a flyer's QR code, or reach out and we'll walk you through any of it.</p>
+            </div>
+
+            <section>
+                <div class="container">
+                    <div class="product-list">
+
+                        <!-- Titan Gaming Platforms -->
+                        <div class="product-card">
+                            <div class="product-flyer">
+                                <img src="products/titan-gaming-platforms.png" alt="Titan Gaming Platforms flyer" loading="lazy" />
+                            </div>
+                            <div class="product-body">
+                                <div class="product-head">
+                                    <h3>Titan Gaming Platforms</h3>
+                                    <span class="product-status status-available">For Sale / License</span>
+                                </div>
+                                <div class="product-price">One-time cost — no monthly fees, own it forever</div>
+                                <p>A fully branded gaming platform for your business, nonprofit, church, school, or city — dozens of games including Chess, Checkers, Sudoku, Cribbage, Hearts, Blackjack, and Zombie Defense, all running under your logo and colors.</p>
+                                <ul>
+                                    <li>Dozens of games included</li>
+                                    <li>Sell ad space in games or on your page</li>
+                                    <li>Branded for your business — your logo, your colors, your message</li>
+                                    <li>Potential annual earnings over $10,000/year</li>
+                                    <li>Perfect for local businesses, nonprofits &amp; churches, schools &amp; PTOs, cities, and clubs</li>
+                                </ul>
+                                <div class="product-cta">
+                                    <a href="mailto:titanbusinesspros@gmail.com?subject=Product%20Inquiry%20-%20Titan%20Gaming%20Platforms" class="btn-outline">Ask about this →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Coloring Book App -->
+                        <div class="product-card">
+                            <div class="product-flyer">
+                                <img src="products/coloring-book-app-daycare.png" alt="Coloring Book App flyer, daycare edition" loading="lazy" />
+                                <img src="products/coloring-book-app-bread-of-life-farms.png" alt="Coloring Book App flyer, branded for Bread of Life Farms" loading="lazy" />
+                                <span class="flyer-caption">Real example: built for Bread of Life Farms</span>
+                            </div>
+                            <div class="product-body">
+                                <div class="product-head">
+                                    <h3>Coloring Book App</h3>
+                                    <span class="product-status status-available">For Sale / License</span>
+                                </div>
+                                <div class="product-price">Only $200, one time</div>
+                                <p>A brandable coloring-book app for daycares, farms, churches, or any business that wants a fun, low-cost way to promote itself to families. We've already delivered a branded version for Bread of Life Farms.</p>
+                                <ul>
+                                    <li>Promote your business</li>
+                                    <li>Showcase your staff</li>
+                                    <li>Highlight your programs</li>
+                                    <li>Make it free for customers, or charge a subscription</li>
+                                    <li>No monthly cost, no hidden fees</li>
+                                </ul>
+                                <div class="product-cta">
+                                    <a href="mailto:titanbusinesspros@gmail.com?subject=Product%20Inquiry%20-%20Coloring%20Book%20App" class="btn-outline">Ask about this →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Team Task Board -->
+                        <div class="product-card">
+                            <div class="product-flyer">
+                                <img src="products/team-task-board.png" alt="Team Task Board flyer" loading="lazy" />
+                            </div>
+                            <div class="product-body">
+                                <div class="product-head">
+                                    <h3>Team Task Board</h3>
+                                    <span class="product-status status-available">For Sale / License</span>
+                                </div>
+                                <p>A real-time team collaboration hub — live chat, kanban-style task management (To Do, In Progress, Review, Completed), file sharing, and admin oversight, all in one place.</p>
+                                <ul>
+                                    <li>Live team communication (real-time chat)</li>
+                                    <li>Task management — create, assign, track, and complete</li>
+                                    <li>File sharing for your team</li>
+                                    <li>Admin oversight of projects, members, and assignments</li>
+                                    <li>An all-in-one hub for projects, files, and progress</li>
+                                </ul>
+                                <div class="product-cta">
+                                    <a href="mailto:titanbusinesspros@gmail.com?subject=Product%20Inquiry%20-%20Team%20Task%20Board" class="btn-outline">Ask about this →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Affordable Websites -->
+                        <div class="product-card">
+                            <div class="product-flyer">
+                                <img src="products/affordable-websites.png" alt="Affordable Websites flyer" loading="lazy" />
+                            </div>
+                            <div class="product-body">
+                                <div class="product-head">
+                                    <h3>Affordable Websites</h3>
+                                    <span class="product-status status-available">Available Now</span>
+                                </div>
+                                <div class="product-price">Starting at only $25 — free hosting included</div>
+                                <p>Fast, professional, mobile-friendly websites for small businesses, contractors, nonprofits, churches, restaurants, events, and online stores, built and hosted at a price almost anyone can afford.</p>
+                                <ul>
+                                    <li>Beautiful, modern designs</li>
+                                    <li>Easy to update anytime</li>
+                                    <li>Mobile-friendly on phones, tablets, and computers</li>
+                                    <li>Free hosting — no extra fees, no hidden costs</li>
+                                </ul>
+                                <div class="product-cta">
+                                    <a href="mailto:titanbusinesspros@gmail.com?subject=Product%20Inquiry%20-%20Affordable%20Websites" class="btn-outline">Ask about this →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Titan Game Maker -->
+                        <div class="product-card">
+                            <div class="product-flyer">
+                                <img src="products/titan-game-maker.png" alt="Titan Game Maker flyer" loading="lazy" />
+                            </div>
+                            <div class="product-body">
+                                <div class="product-head">
+                                    <h3>Titan Game Maker</h3>
+                                    <span class="product-status status-available">Available Now</span>
+                                </div>
+                                <p>A 2D strategy game creator — upload your own sprites, maps, and sounds, then build, customize, and share playable multiplayer strategy games without writing code.</p>
+                                <ul>
+                                    <li>Upload your own sprites, maps &amp; sounds</li>
+                                    <li>Build multiplayer maps</li>
+                                    <li>Customize units, buildings &amp; rules</li>
+                                    <li>Test and play instantly</li>
+                                    <li>Share your games with the world</li>
+                                </ul>
+                                <div class="product-cta">
+                                    <a href="mailto:titanbusinesspros@gmail.com?subject=Product%20Inquiry%20-%20Titan%20Game%20Maker" class="btn-outline">Ask about this →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Titan Education Games -->
+                        <div class="product-card">
+                            <div class="product-flyer">
+                                <img src="products/titan-education-games.png" alt="Titan Education Games flyer" loading="lazy" />
+                            </div>
+                            <div class="product-body">
+                                <div class="product-head">
+                                    <h3>Titan Education Games</h3>
+                                    <span class="product-status status-available">Available Now</span>
+                                </div>
+                                <p>Curriculum-aligned educational games for kindergarten through 5th grade, covering reading, math, science, social studies, creativity, and critical thinking.</p>
+                                <ul>
+                                    <li>Curriculum-aligned games for K–5th grade</li>
+                                    <li>Reading &amp; language arts, math, science, social studies</li>
+                                    <li>Creativity &amp; critical thinking</li>
+                                    <li>Safe for kids, with progress tracking</li>
+                                    <li>Perfect for home or school</li>
+                                </ul>
+                                <div class="product-cta">
+                                    <a href="mailto:titanbusinesspros@gmail.com?subject=Product%20Inquiry%20-%20Titan%20Education%20Games" class="btn-outline">Ask about this →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Survival Day -->
+                        <div class="product-card">
+                            <div class="product-flyer">
+                                <img src="products/survival-day.png" alt="Survival Day flyer" loading="lazy" />
+                            </div>
+                            <div class="product-body">
+                                <div class="product-head">
+                                    <h3>Survival Day</h3>
+                                    <span class="product-status status-available">Available Now</span>
+                                </div>
+                                <p>An off-grid survival companion app — first aid guidance, trail waypoints, water &amp; terrain maps, shelter-building and fire-starting instructions, water purification, and wild game recipes.</p>
+                                <ul>
+                                    <li>First aid</li>
+                                    <li>Waypoints &amp; trail, water &amp; terrain map</li>
+                                    <li>Shelter building &amp; fire starting</li>
+                                    <li>Water purification &amp; finding water</li>
+                                    <li>Snares, traps &amp; wild game recipes</li>
+                                </ul>
+                                <div class="product-cta">
+                                    <a href="mailto:titanbusinesspros@gmail.com?subject=Product%20Inquiry%20-%20Survival%20Day" class="btn-outline">Ask about this →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Email Marketing Agent -->
+                        <div class="product-card">
+                            <div class="product-flyer">
+                                <img src="products/email-marketing-agent.png" alt="Email Marketing Agent flyer" loading="lazy" />
+                            </div>
+                            <div class="product-body">
+                                <div class="product-head">
+                                    <h3>Email Marketing Agent</h3>
+                                    <span class="product-status status-building">In Development</span>
+                                </div>
+                                <p>An outreach automation tool that finds local business leads and sends personalized emails through your own Gmail account — disguised behind a professional from-address — while logging every send and response to Google Sheets.</p>
+                                <ul>
+                                    <li>Uses your own Gmail account</li>
+                                    <li>Automatically finds business leads</li>
+                                    <li>Sends 50–100 personalized emails daily</li>
+                                    <li>Professional email masking (e.g. you@yourcompany.com)</li>
+                                    <li>All responses routed to one master page, logged in Google Sheets</li>
+                                </ul>
+                                <div class="product-cta">
+                                    <a href="mailto:titanbusinesspros@gmail.com?subject=Product%20Inquiry%20-%20Email%20Marketing%20Agent" class="btn-outline">Ask about this →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Wooflahoma Walks -->
+                        <div class="product-card">
+                            <div class="product-flyer">
+                                <img src="products/wooflahoma-walks.png" alt="Wooflahoma Walks flyer" loading="lazy" />
+                            </div>
+                            <div class="product-body">
+                                <div class="product-head">
+                                    <h3>Wooflahoma Walks</h3>
+                                    <span class="product-status status-building">In Development</span>
+                                </div>
+                                <p>A dog-walking marketplace for Oklahoma — dog owners find and book trusted local walkers, with live GPS tracking during every walk.</p>
+                                <ul>
+                                    <li>Find trusted, local dog walkers</li>
+                                    <li>Schedule walks easily</li>
+                                    <li>Live GPS tracking during every walk</li>
+                                    <li>Supports local walkers and builds a safer community for pets</li>
+                                </ul>
+                                <div class="product-cta">
+                                    <a href="mailto:titanbusinesspros@gmail.com?subject=Product%20Inquiry%20-%20Wooflahoma%20Walks" class="btn-outline">Ask about this →</a>
+                                    <a href="https://dw-app-2beee.web.app" target="_blank" rel="noopener noreferrer" class="product-live-link">Live preview →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- After Earth -->
+                        <div class="product-card">
+                            <div class="product-flyer">
+                                <img src="products/after-earth.png" alt="After Earth flyer" loading="lazy" />
+                            </div>
+                            <div class="product-body">
+                                <div class="product-head">
+                                    <h3>After Earth</h3>
+                                    <span class="product-status status-building">In Development</span>
+                                </div>
+                                <p>Our first RTS (real-time strategy) game — mine resources, build a base, command your forces, and battle across alien worlds.</p>
+                                <ul>
+                                    <li>Gather resources</li>
+                                    <li>Build your base</li>
+                                    <li>Command your forces</li>
+                                    <li>Explore new worlds</li>
+                                    <li>Battle for survival</li>
+                                </ul>
+                                <div class="product-cta">
+                                    <a href="mailto:titanbusinesspros@gmail.com?subject=Product%20Inquiry%20-%20After%20Earth" class="btn-outline">Ask about this →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Later Y'all -->
+                        <div class="product-card">
+                            <div class="product-flyer">
+                                <img src="products/chat-later-yall.png" alt="Chat Later Y'all logo" loading="lazy" />
+                            </div>
+                            <div class="product-body">
+                                <div class="product-head">
+                                    <h3>Chat Later Y'all</h3>
+                                    <span class="product-status status-building">Early Concept</span>
+                                </div>
+                                <p>An early-stage concept for a global chat app — connecting and translating conversations between people across languages and countries.</p>
+                                <div class="product-cta">
+                                    <a href="mailto:titanbusinesspros@gmail.com?subject=Product%20Inquiry%20-%20Chat%20Later%20Y%27all" class="btn-outline">Ask about this →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta-band">
+                <div class="container">
+                    <span class="section-eyebrow">Don't See What You Need?</span>
+                    <h2>We build custom apps too.</h2>
+                    <p>Everything on this page started as a client need or an idea worth chasing. If you've got something specific in mind, let's talk about building it.</p>
+                    <a href="mailto:titanbusinesspros@gmail.com?subject=Custom%20App%20Inquiry" class="btn-primary">Get in touch →</a>
                 </div>
             </section>
 
