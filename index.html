@@ -296,6 +296,254 @@
             to { transform: perspective(300px) rotateX(0deg); opacity: 1; }
         }
 
+        /* ==================== 3D SYSTEM v2 — BIGGER, BOLDER ====================
+           A second, louder pass: a magnetic cursor, whole-page icon parallax,
+           a lit 3D centerpiece with a scroll-driven camera, full 3D page-flip
+           transitions, aurora glow, a coverflow carousel, embossed 3D type,
+           and orbiting satellite rings. */
+
+        main {
+            position: relative;
+        }
+
+        /* ---- Magnetic glow cursor (desktop / precise pointers only) ---- */
+        @media (pointer: fine) {
+            body.magic-cursor-on,
+            body.magic-cursor-on a,
+            body.magic-cursor-on button,
+            body.magic-cursor-on .tilt-3d,
+            body.magic-cursor-on input {
+                cursor: none;
+            }
+        }
+        .magic-cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 32px;
+            height: 32px;
+            margin: -16px 0 0 -16px;
+            border: 1.5px solid var(--brass-300);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: width 0.25s ease, height 0.25s ease, margin 0.25s ease, background 0.25s ease, opacity 0.25s ease;
+        }
+        .magic-cursor-ring.is-hovering {
+            width: 60px;
+            height: 60px;
+            margin: -30px 0 0 -30px;
+            background: rgba(94, 234, 212, 0.14);
+        }
+        .magic-cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 6px;
+            margin: -3px 0 0 -3px;
+            background: var(--brass-300);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ---- Floating 3D icons drifting through dark sections (mouse parallax) ---- */
+        .float-icon-3d {
+            position: absolute;
+            z-index: 1;
+            pointer-events: none;
+            font-size: 1.7rem;
+            opacity: 0.45;
+            filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.4));
+            will-change: transform;
+        }
+        .float-icon-3d .float-icon-inner {
+            display: block;
+            animation: floatIconBob 6s ease-in-out infinite;
+        }
+        @keyframes floatIconBob {
+            0%, 100% { transform: translateY(0) rotate(-6deg); }
+            50% { transform: translateY(-16px) rotate(6deg); }
+        }
+
+        /* ---- Full 3D page-flip transitions between views ---- */
+        main.flip-3d-active {
+            perspective: 1800px;
+        }
+        .view.flip-out {
+            display: block !important;
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            backface-visibility: hidden;
+            animation: viewFlipOut 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        .view.flip-in {
+            backface-visibility: hidden;
+            animation: viewFlipIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        @keyframes viewFlipOut {
+            from { transform: rotateY(0deg) scale(1); opacity: 1; }
+            to { transform: rotateY(-90deg) scale(0.92); opacity: 0; }
+        }
+        @keyframes viewFlipIn {
+            from { transform: rotateY(90deg) scale(0.92); opacity: 0; }
+            to { transform: rotateY(0deg) scale(1); opacity: 1; }
+        }
+
+        /* ---- Aurora gradient-mesh glow (dark sections only) ---- */
+        .footer,
+        .contact-band {
+            position: relative;
+            overflow: hidden;
+        }
+        .footer::before,
+        .contact-band::before {
+            content: "";
+            position: absolute;
+            width: 140%;
+            height: 160%;
+            top: -30%;
+            left: -20%;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(94, 234, 212, 0.22), transparent 42%),
+                radial-gradient(circle at 80% 25%, rgba(184, 134, 59, 0.2), transparent 45%),
+                radial-gradient(circle at 50% 85%, rgba(94, 234, 212, 0.16), transparent 42%);
+            filter: blur(60px);
+            animation: auroraDrift 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .footer .container,
+        .contact-band .container {
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes auroraDrift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-3%, 2%) rotate(4deg); }
+            66% { transform: translate(2%, -3%) rotate(-4deg); }
+        }
+
+        /* ---- Embossed, extruded 3D headline type ---- */
+        .hero h1,
+        .licensing-hero h1 {
+            text-shadow:
+                0 1px 0 rgba(255, 255, 255, 0.08),
+                0 2px 0 rgba(0, 0, 0, 0.18),
+                0 3px 1px rgba(0, 0, 0, 0.15),
+                0 4px 2px rgba(0, 0, 0, 0.12),
+                0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+        .page-hero h1,
+        .section-title {
+            text-shadow:
+                0 1px 0 rgba(255, 255, 255, 0.4),
+                0 1.5px 2px rgba(14, 26, 28, 0.1);
+        }
+
+        /* ---- Coverflow carousel (Products page flyers) ---- */
+        .coverflow-section {
+            background: var(--ink-950);
+            padding: 4rem 0 2.5rem;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        .coverflow-section .section-eyebrow {
+            color: var(--brass-300);
+        }
+        .coverflow-section .section-title {
+            color: #F4F2EC;
+            text-shadow: none;
+        }
+        .coverflow-3d {
+            perspective: 1300px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            padding: 2.5rem 42vw 1rem;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .coverflow-3d::-webkit-scrollbar {
+            display: none;
+        }
+        .coverflow-track {
+            display: inline-flex;
+            gap: 2.4rem;
+            align-items: center;
+        }
+        .coverflow-item {
+            flex: 0 0 200px;
+            scroll-snap-align: center;
+            cursor: pointer;
+            will-change: transform;
+        }
+        .coverflow-item img {
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 24px 40px -14px rgba(0, 0, 0, 0.65);
+        }
+        .coverflow-label {
+            margin-top: 0.7rem;
+            text-align: center;
+            color: var(--brass-300);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .coverflow-item.is-center .coverflow-label {
+            opacity: 1;
+        }
+        .coverflow-hint {
+            color: var(--slate-400);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.74rem;
+            margin-top: 0.4rem;
+        }
+
+        /* ---- Orbiting satellite rings around the big "500+" stat ---- */
+        .orbit-wrap {
+            position: relative;
+            display: inline-block;
+        }
+        .orbit-ring {
+            position: absolute;
+            inset: -22px;
+            border: 1px dashed rgba(94, 234, 212, 0.35);
+            border-radius: 50%;
+            transform: rotateX(68deg);
+            pointer-events: none;
+        }
+        .orbit-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--brass-300);
+            box-shadow: 0 0 10px var(--brass-300);
+            animation: orbitSpin 5s linear infinite;
+            pointer-events: none;
+        }
+        .orbit-dot.orbit-dot-2 {
+            background: #B8863B;
+            box-shadow: 0 0 10px #B8863B;
+            animation-duration: 7.5s;
+            animation-direction: reverse;
+        }
+        @keyframes orbitSpin {
+            from { transform: rotate(0deg) translateX(48px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(48px) rotate(-360deg); }
+        }
+
         /* -------------------- View switching (Home / About / Glossary / Licensing) -------------------- */
         .view {
             display: none;
@@ -2052,6 +2300,18 @@
                 <p>Everything below is real work out of Titan Business Pros: some ready to license today, some still in active development. Scan a flyer's QR code, or reach out and we'll walk you through any of it.</p>
             </div>
 
+            <!-- Populated by JS from the product cards below — see "3D SYSTEM v2 INIT". -->
+            <section class="coverflow-section">
+                <div class="container">
+                    <span class="section-eyebrow">Browse The Lineup</span>
+                    <h2 class="section-title">Flip through everything we've built.</h2>
+                </div>
+                <div class="coverflow-3d" id="productCoverflow">
+                    <div class="coverflow-track" id="productCoverflowTrack"></div>
+                </div>
+                <p class="coverflow-hint">← drag or scroll to browse, click one to jump to it →</p>
+            </section>
+
             <section>
                 <div class="container">
                     <div class="product-list">
@@ -2383,24 +2643,65 @@
 
     <script>
         // ============================= VIEW ROUTER =============================
-        function showView(name, anchorId) {
-            document.querySelectorAll(".view").forEach(function(v) {
-                v.classList.remove("active");
-            });
-            var target = document.getElementById("view-" + name);
-            if (target) target.classList.add("active");
+        var prefersReduceMotionGlobal = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        function activateView(target) {
             if (target && window.mountHero3D) {
                 var heroEl = target.querySelector(".hero, .licensing-hero");
                 if (heroEl) window.mountHero3D(heroEl);
             }
-            if (anchorId) {
-                requestAnimationFrame(function() {
+        }
+
+        function showView(name, anchorId) {
+            var current = document.querySelector(".view.active");
+            var target = document.getElementById("view-" + name);
+            if (!target) return;
+
+            // Same view already active (e.g. a "Platform" nav link clicked while
+            // already on the Platform view) — just handle the anchor jump.
+            if (target === current) {
+                if (anchorId) {
+                    requestAnimationFrame(function() {
+                        var el = document.getElementById(anchorId);
+                        if (el) el.scrollIntoView({ behavior: "smooth" });
+                    });
+                }
+                return;
+            }
+
+            var main = document.querySelector("main");
+            var canFlip = main && current && !prefersReduceMotionGlobal && !main.classList.contains("flip-3d-active");
+
+            if (!canFlip) {
+                document.querySelectorAll(".view").forEach(function(v) { v.classList.remove("active"); });
+                target.classList.add("active");
+                activateView(target);
+                if (anchorId) {
+                    requestAnimationFrame(function() {
+                        var el = document.getElementById(anchorId);
+                        if (el) el.scrollIntoView({ behavior: "smooth" });
+                    });
+                } else {
+                    window.scrollTo({ top: 0, behavior: "instant" });
+                }
+                return;
+            }
+
+            // Full 3D flip transition — see .flip-out / .flip-in in "3D SYSTEM v2".
+            window.scrollTo({ top: 0, behavior: "instant" });
+            main.classList.add("flip-3d-active");
+            current.classList.add("flip-out");
+            target.classList.add("active", "flip-in");
+            activateView(target);
+            setTimeout(function() {
+                current.classList.remove("active", "flip-out");
+                target.classList.remove("flip-in");
+                main.classList.remove("flip-3d-active");
+                if (anchorId) {
                     var el = document.getElementById(anchorId);
                     if (el) el.scrollIntoView({ behavior: "smooth" });
-                });
-            } else {
-                window.scrollTo({ top: 0, behavior: "instant" });
-            }
+                }
+            }, 620);
         }
 
         // ============================= GLOSSARY =============================
@@ -2623,6 +2924,10 @@
                     var shift = (window.scrollY * 0.12) + "px";
                     document.querySelectorAll(".hero, .licensing-hero").forEach(function(hero) {
                         hero.style.setProperty("--grid-shift", shift);
+                        if (hero.offsetParent === null) return;
+                        var rect = hero.getBoundingClientRect();
+                        var p = Math.min(Math.max((-rect.top) / Math.max(rect.height, 1), 0), 1);
+                        if (window._setHeroScrollProgress) window._setHeroScrollProgress(p);
                     });
                 }
                 scrollTicking = false;
@@ -2651,8 +2956,9 @@
             // ---------- 8. Live WebGL particle field in every dark hero ----------
             if (reduceMotion || typeof THREE === "undefined") return;
 
-            var heroCanvas, heroRenderer, heroScene, heroCamera, heroGroup;
-            var mouseX = 0, mouseY = 0;
+            var heroCanvas, heroRenderer, heroScene, heroCamera, heroGroup, heroCenterpiece;
+            var mouseX = 0, mouseY = 0, heroScrollProgress = 0;
+            window._setHeroScrollProgress = function(p) { heroScrollProgress = p; };
 
             function ensureHero3D() {
                 if (heroRenderer) return;
@@ -2688,6 +2994,35 @@
 
                 heroScene.add(heroGroup);
 
+                // A bold, lit centerpiece — rotates independently of the outer
+                // wireframe/particle atmosphere for a layered, "alive" scene.
+                heroScene.add(new THREE.AmbientLight(0x224444, 0.65));
+                var light1 = new THREE.PointLight(0x5EEAD4, 3, 22);
+                light1.position.set(4, 3, 5);
+                heroScene.add(light1);
+                var light2 = new THREE.PointLight(0xB8863B, 2.2, 22);
+                light2.position.set(-4, -2, 4);
+                heroScene.add(light2);
+
+                heroCenterpiece = new THREE.Group();
+                var knotGeo = new THREE.TorusKnotGeometry(1.35, 0.4, 150, 18);
+                var knotMat = new THREE.MeshStandardMaterial({
+                    color: 0x123B38,
+                    metalness: 0.55,
+                    roughness: 0.3,
+                    emissive: 0x5EEAD4,
+                    emissiveIntensity: 0.55
+                });
+                heroCenterpiece.add(new THREE.Mesh(knotGeo, knotMat));
+                // A bright edge outline on top of the solid mesh — guarantees the
+                // centerpiece reads clearly even where the dark faces catch no light.
+                var knotEdges = new THREE.LineSegments(
+                    new THREE.EdgesGeometry(knotGeo, 1),
+                    new THREE.LineBasicMaterial({ color: 0x5EEAD4, transparent: true, opacity: 0.55 })
+                );
+                heroCenterpiece.add(knotEdges);
+                heroScene.add(heroCenterpiece);
+
                 window.addEventListener("mousemove", function(e) {
                     mouseX = (e.clientX / window.innerWidth) - 0.5;
                     mouseY = (e.clientY / window.innerHeight) - 0.5;
@@ -2710,6 +3045,14 @@
                     if (!heroCanvas || heroCanvas.offsetParent === null) return;
                     heroGroup.rotation.y += 0.0016;
                     heroGroup.rotation.x += 0.0005;
+                    heroCenterpiece.rotation.x += 0.0032;
+                    heroCenterpiece.rotation.y -= 0.0022;
+                    // Scroll-driven camera fly-through: dolly in and bank slightly
+                    // as this hero scrolls past, so the centerpiece feels like it's
+                    // rushing toward the viewer rather than just sitting there.
+                    var targetZ = 9 - heroScrollProgress * 3.2;
+                    heroCamera.position.z += (targetZ - heroCamera.position.z) * 0.06;
+                    heroGroup.rotation.z += ((heroScrollProgress * 0.35) - heroGroup.rotation.z) * 0.06;
                     heroCamera.position.x += (mouseX * 1.4 - heroCamera.position.x) * 0.03;
                     heroCamera.position.y += (-mouseY * 1.0 - heroCamera.position.y) * 0.03;
                     heroCamera.lookAt(0, 0, 0);
@@ -2728,6 +3071,175 @@
             };
 
             window.mountHero3D(document.querySelector("#view-home .hero"));
+        })();
+
+        // ============================= 3D SYSTEM v2 INIT =============================
+        (function() {
+            var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            var isFinePointer = window.matchMedia && window.matchMedia("(pointer: fine)").matches;
+
+            // ---------- 1. Magnetic glow cursor ----------
+            if (!reduceMotion && isFinePointer) {
+                var ring = document.createElement("div");
+                ring.className = "magic-cursor-ring";
+                var dot = document.createElement("div");
+                dot.className = "magic-cursor-dot";
+                document.body.appendChild(ring);
+                document.body.appendChild(dot);
+                document.body.classList.add("magic-cursor-on");
+
+                var mx = window.innerWidth / 2, my = window.innerHeight / 2;
+                var rx = mx, ry = my;
+                document.addEventListener("mousemove", function(e) {
+                    mx = e.clientX;
+                    my = e.clientY;
+                    dot.style.transform = "translate(" + mx + "px," + my + "px)";
+                    var hoverTarget = e.target.closest ? e.target.closest("a, button, .tilt-3d, input, .coverflow-item") : null;
+                    ring.classList.toggle("is-hovering", !!hoverTarget);
+                }, { passive: true });
+                document.addEventListener("mouseleave", function() {
+                    ring.style.opacity = "0";
+                    dot.style.opacity = "0";
+                });
+                document.addEventListener("mouseenter", function() {
+                    ring.style.opacity = "1";
+                    dot.style.opacity = "1";
+                });
+                (function cursorLoop() {
+                    requestAnimationFrame(cursorLoop);
+                    rx += (mx - rx) * 0.18;
+                    ry += (my - ry) * 0.18;
+                    ring.style.transform = "translate(" + rx + "px," + ry + "px)";
+                })();
+            }
+
+            // ---------- 2. Floating 3D icons + site-wide mouse parallax ----------
+            if (!reduceMotion) {
+                var ICONS = ["\u{1F3AE}", "\u{1F0CF}", "\u{1F4AC}", "\u{1F6E1}️", "\u{1F3C6}", "\u{1F48E}"];
+                var hosts = document.querySelectorAll(".hero, .licensing-hero, .footer");
+                var iconIndex = 0;
+                hosts.forEach(function(host) {
+                    var count = host.classList.contains("footer") ? 2 : 3;
+                    for (var i = 0; i < count; i++) {
+                        var outer = document.createElement("div");
+                        outer.className = "float-icon-3d";
+                        outer.dataset.depth = (14 + Math.random() * 18).toFixed(1);
+                        outer.style.top = (12 + Math.random() * 70) + "%";
+                        outer.style.left = (6 + Math.random() * 88) + "%";
+                        var inner = document.createElement("span");
+                        inner.className = "float-icon-inner";
+                        inner.textContent = ICONS[iconIndex % ICONS.length];
+                        inner.style.animationDelay = (Math.random() * 4).toFixed(2) + "s";
+                        iconIndex++;
+                        outer.appendChild(inner);
+                        host.appendChild(outer);
+                    }
+                });
+
+                var px = 0, py = 0;
+                document.addEventListener("pointermove", function(e) {
+                    px = (e.clientX / window.innerWidth) - 0.5;
+                    py = (e.clientY / window.innerHeight) - 0.5;
+                }, { passive: true });
+
+                (function parallaxLoop() {
+                    requestAnimationFrame(parallaxLoop);
+                    document.querySelectorAll(".float-icon-3d").forEach(function(el) {
+                        var depth = parseFloat(el.dataset.depth || "20");
+                        el.style.transform = "translate3d(" + (px * depth) + "px," + (py * depth) + "px,0)";
+                    });
+                    document.querySelectorAll(".hero-inner, .licensing-hero-inner").forEach(function(el) {
+                        if (el.offsetParent === null) return;
+                        el.style.transform = "translate3d(" + (px * -8) + "px," + (py * -5) + "px,0)";
+                    });
+                })();
+            }
+
+            // ---------- 3. Orbiting satellite rings around the big "500+" stat ----------
+            document.querySelectorAll(".big-num").forEach(function(el) {
+                var orbitWrap = document.createElement("span");
+                orbitWrap.className = "orbit-wrap";
+                el.parentNode.insertBefore(orbitWrap, el);
+                orbitWrap.appendChild(el);
+                var ring = document.createElement("span");
+                ring.className = "orbit-ring";
+                orbitWrap.appendChild(ring);
+                var dot1 = document.createElement("span");
+                dot1.className = "orbit-dot";
+                orbitWrap.appendChild(dot1);
+                var dot2 = document.createElement("span");
+                dot2.className = "orbit-dot orbit-dot-2";
+                orbitWrap.appendChild(dot2);
+            });
+
+            // ---------- 4. Coverflow carousel (Products page flyers) ----------
+            var track = document.getElementById("productCoverflowTrack");
+            var coverWrap = document.getElementById("productCoverflow");
+            if (track && coverWrap) {
+                var cards = document.querySelectorAll("#view-products .product-list .product-card");
+                cards.forEach(function(card) {
+                    var img = card.querySelector(".product-flyer img");
+                    var name = card.querySelector("h3");
+                    if (!img || !name) return;
+                    var safeName = name.textContent.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+                    var item = document.createElement("div");
+                    item.className = "coverflow-item";
+                    item.innerHTML = '<img src="' + img.getAttribute("src") + '" alt="' + safeName + '" loading="lazy" /><div class="coverflow-label">' + name.textContent + "</div>";
+                    item.addEventListener("click", function() {
+                        item.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+                        setTimeout(function() {
+                            card.scrollIntoView({ behavior: "smooth", block: "center" });
+                        }, reduceMotion ? 0 : 380);
+                    });
+                    track.appendChild(item);
+                });
+
+                var coverflowTicking = false;
+                function updateCoverflow() {
+                    var center = coverWrap.scrollLeft + coverWrap.clientWidth / 2;
+                    coverWrap.querySelectorAll(".coverflow-item").forEach(function(item) {
+                        var itemCenter = item.offsetLeft + item.offsetWidth / 2;
+                        var dist = (itemCenter - center) / (coverWrap.clientWidth / 2);
+                        var clamped = Math.max(-1.6, Math.min(1.6, dist));
+                        var rotY = clamped * 45;
+                        var scale = 1 - Math.min(Math.abs(clamped), 1) * 0.28;
+                        var z = -Math.abs(clamped) * 140;
+                        var opacity = 1 - Math.min(Math.abs(clamped), 1) * 0.55;
+                        item.style.transform = "perspective(1200px) translateZ(" + z + "px) rotateY(" + (-rotY) + "deg) scale(" + scale + ")";
+                        item.style.opacity = opacity;
+                        item.classList.toggle("is-center", Math.abs(clamped) < 0.15);
+                    });
+                    coverflowTicking = false;
+                }
+                coverWrap.addEventListener("scroll", function() {
+                    if (!coverflowTicking) {
+                        requestAnimationFrame(updateCoverflow);
+                        coverflowTicking = true;
+                    }
+                }, { passive: true });
+                window.addEventListener("resize", updateCoverflow);
+                requestAnimationFrame(function() {
+                    var first = track.querySelector(".coverflow-item");
+                    if (first) first.scrollIntoView({ inline: "center", block: "nearest" });
+                    updateCoverflow();
+                });
+            }
+
+            // ---------- 5. Extend the 3D scroll-reveal to section headings ----------
+            if (window.IntersectionObserver) {
+                var headingIO = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("in-view");
+                            headingIO.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.2 });
+                document.querySelectorAll(".section-title").forEach(function(el) {
+                    el.classList.add("reveal-3d");
+                    headingIO.observe(el);
+                });
+            }
         })();
     </script>
 
