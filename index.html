@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Titan Business Pros | Private-Label Social Platforms</title>
-    <meta name="description" content="Titan Business Pros builds and licenses a complete, production-proven social platform — real games, real subscription billing, bank-grade security — launched under your brand." />
+    <title>Titan Website</title>
+    <meta name="description" content="Explore Titan Business Pros products, including The Titan Halloween App, a customizable Halloween promotional app with ten included tools." />
     <link rel="icon" type="image/png" href="https://github.com/TitanBusinessPros/Lease-Ag-Land-4-More/raw/main/Titan%20Logo-2.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -1025,7 +1025,7 @@
             color: var(--text-muted);
         }
         .module li::before {
-            content: "✓";
+            content: "\2713";
             position: absolute;
             left: 0;
             top: 0;
@@ -1242,7 +1242,6 @@
             font-weight: 600;
             text-decoration: underline;
         }
-
         /* -------------------- Products: unique sections -------------------- */
         .product-list {
             display: flex;
@@ -1328,6 +1327,18 @@
             list-style: none;
             margin-bottom: 1.3rem;
         }
+        .product-info-columns {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+        .product-info-columns h4 {
+            margin-bottom: 0.65rem;
+            font-size: 0.9rem;
+        }
+        .product-info-columns ul {
+            margin-bottom: 0;
+        }
         .product-body li {
             position: relative;
             padding-left: 1.4rem;
@@ -1337,7 +1348,7 @@
             color: var(--text-muted);
         }
         .product-body li::before {
-            content: "✓";
+            content: "\2713";
             position: absolute;
             left: 0;
             color: var(--brass-500);
@@ -1363,6 +1374,10 @@
         @media (max-width: 720px) {
             .product-card {
                 flex-direction: column;
+            }
+            .product-info-columns {
+                grid-template-columns: 1fr;
+                gap: 0.35rem;
             }
             .product-flyer {
                 flex: none;
@@ -2505,6 +2520,51 @@
             <section>
                 <div class="container">
                     <div class="product-list">
+
+                        <!-- The Titan Halloween App: first product in the list and product carousel -->
+                        <div class="product-card">
+                            <div class="product-flyer">
+                                <img src="products/Halloween-App.png" alt="The Titan Halloween App custom Halloween product" loading="lazy" />
+                            </div>
+                            <div class="product-body">
+                                <div class="product-head">
+                                    <h3>The Titan Halloween App &mdash; Custom Halloween Promotional App</h3>
+                                    <span class="product-status status-available">For Sale / Custom Branding</span>
+                                </div>
+                                <div class="product-price">No monthly fees. No hidden fees. Contact us for purchase pricing.</div>
+                                <p>A customizable Halloween app for your company, with your branding, promotional space, and ten Halloween tools. Use the free GitHub Pages address, or provide or purchase a custom domain if you do not want to use GitHub's free domain.</p>
+                                <div class="product-info-columns">
+                                    <div>
+                                        <h4>Company Branding</h4>
+                                        <ul>
+                                            <li>Company logo as your favicon; choose your logo or another image for the app icon.</li>
+                                            <li>Top banner for your company information and ads; footer for your company information and website.</li>
+                                            <li>Flying witch advertisement for one of your services or products.</li>
+                                            <li>No monthly fees or hidden fees.</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4>Included Tools</h4>
+                                        <ul>
+                                            <li>Classic Halloween Website Maker</li>
+                                            <li>Simple Halloween Website Maker</li>
+                                            <li>Halloween Catering Generator</li>
+                                            <li>Halloween Coupon Generator</li>
+                                            <li>Halloween QR Code Generator</li>
+                                            <li>Horror Film Trivia Website Maker</li>
+                                            <li>Halloween Flyer Builder</li>
+                                            <li>Haunted House Waiver Generator</li>
+                                            <li>Spooky Flyer Builder</li>
+                                            <li>Halloween Math Battle (desktop only)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-cta">
+                                    <a href="https://titanbusinesspros.github.io/H-App-1/" target="_blank" rel="noopener noreferrer" class="product-live-link">View The Titan Halloween App →</a>
+                                    <a href="tel:4059987979" class="btn-outline">Call or text us →</a>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Coloring Book App -->
                         <div class="product-card">
