@@ -700,6 +700,29 @@
         .btn-header-cta .cta-short {
             display: none;
         }
+        .header-tools-row {
+            display: flex;
+            justify-content: center;
+            padding: 0 0 0.85rem;
+        }
+        .btn-business-tools {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.55rem 1.25rem;
+            border: 1.5px solid #F4F2EC;
+            border-radius: 4px;
+            color: #F4F2EC;
+            font-size: 0.92rem;
+            font-weight: 700;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .btn-business-tools:hover,
+        .btn-business-tools:focus-visible {
+            background: #F4F2EC;
+            color: #0F1720;
+        }
         /* ---- Mobile menu (hamburger toggle + full-screen overlay) — base rules
            must come before the @media block below, or its "display: flex" override
            gets clobbered by this unconditional "display: none" in the cascade. ---- */
@@ -1943,6 +1966,9 @@
                 <span class="nav-toggle-bar"></span>
             </button>
         </div>
+        <div class="container header-tools-row">
+            <a class="btn-business-tools" href="https://titanbusinesspros.github.io/TBT-App/">Business Tools App</a>
+        </div>
     </header>
 
     <!-- Mobile menu — on screens ≤760px the header nav above collapses to just the
@@ -2708,6 +2734,7 @@
                                     <li>An all-in-one hub for projects, files, and progress</li>
                                 </ul>
                                 <div class="product-cta">
+                                    <a href="https://titanbusinesspros.github.io/TBT-App/" target="_blank" rel="noopener noreferrer" class="btn-outline">Business Tools App</a>
                                     <a href="tel:4059987979" class="btn-outline">📞 Call or text us →</a>
                                 </div>
                             </div>
